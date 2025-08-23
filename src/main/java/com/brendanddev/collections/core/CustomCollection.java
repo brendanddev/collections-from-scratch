@@ -1,6 +1,5 @@
 package com.brendanddev.collections.core;
 
-
 /**
  * A generic collection interface representing a collection of elements.
  * Provides basic operations for managing the collection.
