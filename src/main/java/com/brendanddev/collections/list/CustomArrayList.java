@@ -1,6 +1,9 @@
 package com.brendanddev.collections.list;
 
+import java.util.NoSuchElementException;
+
 import com.brendanddev.collections.core.CustomCollection;
+import com.brendanddev.collections.core.CustomIterator;
 
 /**
  * A custom generic array-backed list implementation.
@@ -19,9 +22,6 @@ public class CustomArrayList<T> implements CustomCollection<T> {
     }
 
 
-
-
-
     /**
      * Ensures that the internal array has enough capacity to add a new element.
      * 
@@ -35,5 +35,33 @@ public class CustomArrayList<T> implements CustomCollection<T> {
             elements = newArr;
         }
     }
-    
+
+    /**
+     * Inner class implementing the CustomIterator for this list.
+     */
+    private class CustomArrayListIterator implements CustomIterator<T> {
+        private int currentIndex = 0;
+
+        /**
+         * Checks if there are more elements to iterate over.
+         */
+        @Override
+        public boolean hasNext() {
+            return currentIndex < size;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         */
+        @SuppressWarnings("unchecked")
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("No more elements in the list.");
+            }
+            return (T) elements[currentIndex++];
+        }
+
+    }
+
 }
