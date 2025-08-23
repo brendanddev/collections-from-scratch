@@ -21,6 +21,32 @@ public class CustomArrayList<T> implements CustomCollection<T> {
         elements = new Object[DEFAULT_CAPACITY];
     }
 
+    /**
+     * Returns the number of elements in the list.
+     */
+    @Override
+    public int size() {
+        return size;
+    }
+
+    /**
+     * Checks if the list is empty.
+     */
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * Returns an iterator over the elements in the list.
+     * 
+     * @return a CustomIterator for traversing the list
+     */
+    @Override
+    public CustomIterator<T> iterator() {
+        return new CustomArrayListIterator();
+    }
+
 
     /**
      * Ensures that the internal array has enough capacity to add a new element.
