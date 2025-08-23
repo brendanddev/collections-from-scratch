@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+import com.brendanddev.collections.core.CustomIterator;
 import com.brendanddev.collections.list.CustomArrayList;
 
 /**
@@ -36,6 +37,23 @@ public class CustomArrayListTest {
         assertTrue(customArrayList.remove("Hello"));
         assertFalse(customArrayList.contains("Hello"));
         assertEquals(1, customArrayList.size());
+    }
+
+    /**
+     * Tests the iterator of the CustomArrayList.
+     */
+    @Test 
+    void testIterator() {
+        CustomArrayList<String> customArrayList = new CustomArrayList<>();
+        customArrayList.add("X");
+        customArrayList.add("Y");
+
+        CustomIterator<String> iterator = customArrayList.iterator();
+        assertTrue(iterator.hasNext());
+        assertEquals("X", iterator.next());
+        assertTrue(iterator.hasNext());
+        assertEquals("Y", iterator.next());
+        assertFalse(iterator.hasNext());
     }
     
 }
