@@ -22,7 +22,6 @@ public class CustomArrayList<T> implements CustomCollection<T> {
     }
 
 
-
     /**
      * Adds an element to the end of the list.
      * If the internal array is full, the arrays capacity is doubled before adding.
@@ -98,6 +97,29 @@ public class CustomArrayList<T> implements CustomCollection<T> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    /**
+     * Returns a string representation of the list.
+     */
+    @Override
+    public String toString() {
+        if (isEmpty()) {
+            return "[]";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+
+        for (int i = 0; i < size; i++) {
+            sb.append(elements[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+
+        sb.append("]");
+        return sb.toString();
     }
 
     /**
