@@ -74,10 +74,27 @@ public class CustomHashMap<K, V> {
         return null;
     }
 
+    /**
+     * Retrieves the value associated with a key.
+     * 
+     * @param key The key to lookup.
+     * @return The value for the key, or null if the key does not exist.
+     */
+    public V get(K key) {
+        // Compute bucket index for the key
+        int index = getHash(key, buckets.length);
+        ArrayList<Entry<K, V>> bucket = buckets[index];
 
-
-
-
+        // Iterate through the entries in this bucket
+        for (Entry<K, V> entry : bucket) {
+            if (entry.key.equals(key)) {
+                // Key found, return value
+                return entry.value;
+            }
+        }
+        // Key not found
+        return null;
+    }
 
 
 
