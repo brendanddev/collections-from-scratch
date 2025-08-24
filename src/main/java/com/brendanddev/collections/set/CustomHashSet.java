@@ -9,6 +9,12 @@ import com.brendanddev.collections.core.CustomIterator;
 /**
  * A generic hash based implementation of a Set using an array of buckets.
  * Each bucket is an ArrayList that stores elements with the same hash index.
+ * 
+ *  Time Complexity
+ *  Insert	O(1) (average case)
+ *  Search	O(1) (average case)
+ *  Remove	O(1) (average case)
+ *  Resize	O(n) (but happens rarely)
  */
 public class CustomHashSet<T> implements CustomCollection<T> {
 

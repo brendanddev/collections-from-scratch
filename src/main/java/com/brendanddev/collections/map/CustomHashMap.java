@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 /**
  * A custom generic hash based implementation of a Map using an array of buckets.
+ * 
+ * Time Complexity
+ * Insert/Update: O(1)
+ * Search (get/containsKey): O(1)
+ * Remove: O(1)
+ * Resize: O(n) (but happens rarely)
+ * 
+ * Note: Worst-case time complexity can degrade to O(n) per operation if many keys collide.
  */
 public class CustomHashMap<K, V> {
 
@@ -203,6 +211,7 @@ public class CustomHashMap<K, V> {
          * 
          * @param key The key for this entry.
          */
+        @SuppressWarnings("unused")
         Entry(K key) {
             this.key = key;
         }
