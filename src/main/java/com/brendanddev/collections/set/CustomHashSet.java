@@ -62,6 +62,12 @@ public class CustomHashSet<T> implements CustomCollection<T> {
         // Add element to the bucket and increment total size
         bucket.add(element);
         size++;
+
+        // Check if resize is needed
+        if ((double) size / buckets.length > AVERAGE_BUCKET_SIZE) {
+            resize();
+        }
+
         return true;
     }
 
