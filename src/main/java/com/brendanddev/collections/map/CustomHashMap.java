@@ -96,9 +96,44 @@ public class CustomHashMap<K, V> {
         return null;
     }
 
+    /**
+     * Removes the key-value pair for a given key.
+     * 
+     * @param key The key to remove.
+     * @return true if the key existed and was removed, otherwise false.
+     */
+    public boolean remove(K key) {
+        int index = getHash(key, buckets.length);
+        ArrayList<Entry<K, V>> bucket = buckets[index];
 
+        for (int i = 0; i < bucket.size(); i++) {
+            if (bucket.get(i).key.equals(key)) {
+                bucket.remove(i);
+                size--;
+                return true;
+            }
+        }
+        return false;
+    }
 
+    /**
+     * Checks if the map contains a given key.
+     * 
+     * @param key The key to check.
+     * @return true if the key exists, otherwise false.
+     */
+    public boolean containsKey(K key) {
+        int index = getHash(key, buckets.length);
+        ArrayList<Entry<K, V>> bucket = buckets[index];
 
+        for (Entry<K, V> entry : bucket) {
+            if (entry.key.equals(key)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Returns the number of key-value pairs currently stored in the map.
