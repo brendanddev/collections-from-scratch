@@ -42,32 +42,44 @@ public class CustomHashSet<T> implements CustomCollection<T> {
         return Math.abs(x.hashCode() % hashSize);
     }
 
-    
-    @Override
-    public int size() {
-    }
-
-    @Override
-    public boolean isEmpty() {
-    }
 
     @Override
     public boolean add(T element) {
-
     }
 
     @Override
     public boolean remove(T element) {
-        
     }
 
     @Override
     public boolean contains(T element) {
-       
+    }
+
+    /**
+     * Returns the number of elements currently stored in the set.
+     */
+    @Override
+    public int size() {
+        return size;
+    }
+
+    /**
+     * Checks if the set contains no elements.
+     */
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     @Override
     public CustomIterator<T> iterator() {
+
+    }
+
+    /**
+     * 
+     */
+    private class CustomHashSetIterator implements CustomIterator<T> {
 
     }
     
