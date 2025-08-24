@@ -15,6 +15,7 @@ public class CustomHashMap<K, V> {
     /**
      * Constructs an empty CustomHashMap with default number of buckets.
      */
+    @SuppressWarnings("unchecked")
     public CustomHashMap() {
         buckets = new ArrayList[DEFAULT_BUCKETS];
         for (int i = 0; i < DEFAULT_BUCKETS; i++) {
@@ -32,6 +33,55 @@ public class CustomHashMap<K, V> {
     private int getHash(K key, int hashSize) {
         return Math.abs(key.hashCode() % hashSize);
     }
+
+    /**
+     * Adds a key-value pair to the CustomHashMap.
+     * 
+     * If the key already exists, updates its value and returns the old value.
+     * If the key does not exist, inserts a new entry and returns null.
+     * Automatically resizes the buckets array if the average number of entries per bucket 
+     * exceeds the threshold to maintain performance.
+     * 
+     * @param key The key to add or update in the map.
+     * @param value The value associated with the key.
+     * @return The old value associated with the key if it existed, 
+     *         or null if a new entry was added.
+     */
+    public V put(K key, V value) {
+        // Compute bucket index for this key using its hash code
+        int index = getHash(key, buckets.length);
+        ArrayList<Entry<K, V>> bucket = buckets[index];
+
+        // Iterate over existing entries in the bucket to see if the key already exists
+        for (Entry<K, V> entry : bucket) {
+            if (entry.key.equals(key)) {
+                // Key exists, update its value and return old value
+                V oldValue = entry.value;
+                entry.value = value;
+                return oldValue;
+            }
+        }
+
+        // Key not found, add new entry
+        bucket.add(new Entry<>(key, value));
+        size++;
+
+        // Resize if necessary
+        if ((double) size / buckets.length > AVERAGE_BUCKET_SIZE) {
+            resize();
+        }
+
+        return null;
+    }
+
+
+
+
+
+
+
+
+
 
     /**
      * Returns the number of key-value pairs currently stored in the map.
