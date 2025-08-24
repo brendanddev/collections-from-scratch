@@ -42,17 +42,45 @@ public class CustomHashSet<T> implements CustomCollection<T> {
         return Math.abs(x.hashCode() % hashSize);
     }
 
-
+    /**
+     * Adds the specified element to the set if not already present.
+     * 
+     * @param element The element to add to the set.
+     * @return true if the element was successfully added, otherwise false.
+     */
     @Override
     public boolean add(T element) {
+        // Compute the bucket index for this element based on its hash code
+        int index = getHash(element, buckets.length);
+        ArrayList<T> bucket = buckets[index];
+
+        // Prevent duplicates
+        if (bucket.contains(element)) {
+            return false;
+        }
+
+        // Add element to the bucket and increment total size
+        bucket.add(element);
+        size++;
+        return true;
     }
 
     @Override
     public boolean remove(T element) {
     }
 
+    /**
+     * Checks whether the specified element exists in the set.
+     * 
+     * @param element The element to check for.
+     * @return true if the element exists in the set, otherwise false.
+     */
     @Override
     public boolean contains(T element) {
+        // Compute which bucket this element belongs to based on its hash code
+        int index = getHash(element, buckets.length);
+        ArrayList<T> bucket = buckets[index];
+        return bucket.contains(element);
     }
 
     /**
@@ -80,7 +108,6 @@ public class CustomHashSet<T> implements CustomCollection<T> {
     @Override
     public CustomIterator<T> iterator() {
         return new CustomHashSetIterator();
-
     }
 
     /**
