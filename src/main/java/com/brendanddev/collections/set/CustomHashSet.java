@@ -65,8 +65,22 @@ public class CustomHashSet<T> implements CustomCollection<T> {
         return true;
     }
 
+    /**
+     * Removes the specified element from the set if present.
+     * 
+     * @param element The element to remove.
+     * @return true if the element was found and removed, otherwise false.
+     */
     @Override
     public boolean remove(T element) {
+        int index = getHash(element, buckets.length);
+        ArrayList<T> bucket = buckets[index];
+
+        if (bucket.remove(element)) {
+            size--;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -97,6 +111,34 @@ public class CustomHashSet<T> implements CustomCollection<T> {
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+    /**
+     * Doubles the number of buckets in the set and redistributes all existing elements.
+     * 
+     * This method is called when the average number of elements per bucket exceeds the desired
+     * threshold, to reduce collisions and maintain efficient access. Each element is rehashed 
+     * according to the new bucket array size.
+     */
+    private void resize() {
+        // Calculate new bucket count
+        int newBucketCount = buckets.length * 2;
+
+        // Create a new array of buckets, initializing each bucket as an empty list
+        ArrayList<T>[] newBuckets = new ArrayList[newBucketCount];
+        for (int i = 0; i < newBucketCount; i++) {
+            newBuckets[i] = new ArrayList<T>();
+        }
+
+        // Rehash each element from the old buckets into new buckets
+        for (ArrayList<T> bucket : buckets) {
+            for (T element : bucket) {
+                int index = getHash(element, newBucketCount);
+                newBuckets[index].add(element);
+            }
+        }
+        // Replace old buckets with new resized bucket array
+        buckets = newBuckets;
     }
 
     /**
