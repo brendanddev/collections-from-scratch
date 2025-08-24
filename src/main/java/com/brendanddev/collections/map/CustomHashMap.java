@@ -1,14 +1,80 @@
 package com.brendanddev.collections.map;
 
+import java.util.ArrayList;
 
 /**
- * 
+ * A custom generic hash based implementation of a Map using an array of buckets.
  */
 public class CustomHashMap<K, V> {
 
+    private ArrayList<Entry<K, V>>[] buckets;
+    private static final int DEFAULT_BUCKETS = 16;
+    private int size = 0;
+    public static final double AVERAGE_BUCKET_SIZE = 3;
 
+    /**
+     * Constructs an empty CustomHashMap with default number of buckets.
+     */
+    public CustomHashMap() {
+        buckets = new ArrayList[DEFAULT_BUCKETS];
+        for (int i = 0; i < DEFAULT_BUCKETS; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+    }
 
+    /**
+     * Computes the bucket index for a given key.
+     * 
+     * @param key The key for which to compute the bucket index.
+     * @param hashSize The total number of buckets in the map.
+     * @return The index of the bucket where the key should be stored.
+     */
+    private int getHash(K key, int hashSize) {
+        return Math.abs(key.hashCode() % hashSize);
+    }
 
+    /**
+     * Returns the number of key-value pairs currently stored in the map.
+     */
+    public int size() {
+        return size;
+    }
+
+    /**
+     * Checks whether the map contains any key-value pairs.
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * Doubles the number of buckets in the map and rehashes all existing entries.
+     * 
+     * This method is called when the average number of entries per bucket exceeds a threshold,
+     * in order to reduce collisions and maintain efficient access. Each entry is redistributed
+     * according to the new number of buckets.
+     */
+    @SuppressWarnings("unchecked")
+    private void resize() {
+        // Calculate the new number of buckets
+        int newBucketCount = buckets.length * 2;
+
+        // Create a new array of buckets, initializing each as an empty ArrayList
+        ArrayList<Entry<K, V>>[] newBuckets = new ArrayList[newBucketCount];
+        for (int i = 0; i < newBucketCount; i++) {
+            newBuckets[i] = new ArrayList<>();
+        }
+
+        // Rehash each existing entry into the appropriate new bucket
+        for (ArrayList<Entry<K, V>> bucket : buckets) {
+            for (Entry<K, V> entry : bucket) {
+                int newIndex = getHash(entry.key, newBucketCount);
+                newBuckets[newIndex].add(entry);
+            }
+        }
+        // Replace the old buckets array with the new, resized array
+        buckets = newBuckets;
+    }
 
 
     /**
