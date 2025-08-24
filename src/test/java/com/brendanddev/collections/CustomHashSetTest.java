@@ -90,5 +90,26 @@ public class CustomHashSetTest {
 
         assertFalse(iterator.hasNext());
     }
+
+    /**
+     * Tests that the set correctly resizes when the average bucket size exceeds the threshold.
+     * Ensures all elements are still present after resizing.
+     */
+    @Test
+    void testResize() {
+        // Add enough elements to trigger resize (assuming DEFAULT_BUCKETS = 16 and AVERAGE_BUCKET_SIZE = 3)
+        int elementsToAdd = (int)(CustomHashSet.AVERAGE_BUCKET_SIZE * 16) + 1;
+        for (int i = 0; i < elementsToAdd; i++) {
+            set.add("Element" + i);
+        }
+
+        // The number of buckets should have increased
+        assertTrue(set.getNumberOfBuckets() > 16);
+
+        // All elements should still be present
+        for (int i = 0; i < elementsToAdd; i++) {
+            assertTrue(set.contains("Element" + i));
+        }
+    }
     
 }

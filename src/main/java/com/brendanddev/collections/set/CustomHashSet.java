@@ -22,6 +22,7 @@ public class CustomHashSet<T> implements CustomCollection<T> {
      * Constructs a new empty CustomHashSet with a default number of buckets.
      * Initializes each bucket as an empty ArrayList.
      */
+    @SuppressWarnings("unchecked")
     public CustomHashSet() {
         buckets = new ArrayList[DEFAULT_BUCKETS];
         for (int i = 0; i < DEFAULT_BUCKETS; i++) {
@@ -126,6 +127,7 @@ public class CustomHashSet<T> implements CustomCollection<T> {
      * threshold, to reduce collisions and maintain efficient access. Each element is rehashed 
      * according to the new bucket array size.
      */
+    @SuppressWarnings("unchecked")
     private void resize() {
         // Calculate new bucket count
         int newBucketCount = buckets.length * 2;
