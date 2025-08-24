@@ -71,15 +71,58 @@ public class CustomHashSet<T> implements CustomCollection<T> {
         return size == 0;
     }
 
+    /**
+     * Creates and returns a new iterator over the elements in this set.
+     * The iterator will traverse all buckets in order and all elements in each bucket.
+     * 
+     * @return CustomIterator for iterating over the sets elements.
+     */
     @Override
     public CustomIterator<T> iterator() {
+        return new CustomHashSetIterator();
 
     }
 
     /**
-     * 
+     * Private inner class that provides iteration over all elements in the set.
      */
     private class CustomHashSetIterator implements CustomIterator<T> {
+        // Track current bucket and index within current bucket
+        private int bucketIndex = 0;
+        private int elementIndex = 0;
+
+        /**
+         * Checks whether there are more elements to iterate over in the set.
+         * Advances the bucket index forward if the current bucket is empty or if the
+         * element index has passed the last element in the current bucket.
+         * 
+         * @return true if there are more elements in the set, otherwise false.
+         */
+        @Override
+        public boolean hasNext() {
+
+            // Skip empty buckets
+            while (bucketIndex < buckets.length && elementIndex >= buckets[bucketIndex].size()) {
+                bucketIndex++;
+                elementIndex = 0;
+            }
+            return bucketIndex < buckets.length;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         * If no more elements are available, throws an exception.
+         * 
+         * @return The next element in the set.
+         * @throws IllegalStateException if there are no more elements to return.
+         */
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new IllegalStateException("No more elements in iterator!");
+            }
+            return buckets[bucketIndex].get(elementIndex++);
+        }
 
     }
     
