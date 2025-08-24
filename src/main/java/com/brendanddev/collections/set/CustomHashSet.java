@@ -142,6 +142,36 @@ public class CustomHashSet<T> implements CustomCollection<T> {
     }
 
     /**
+     * Returns the number of buckets that are currently empty.
+     */
+    public int getNumberOfEmptyBuckets() {
+        int empty = 0;
+        for (ArrayList<T> bucket : buckets) {
+            if (bucket.isEmpty()) empty++;
+        }
+        return empty;
+    }
+
+    /** 
+     * Returns the number of elements in the largest bucket.
+     */
+    public int getLargestBucketSize() {
+        int max = 0;
+        for (ArrayList<T> bucket : buckets) {
+            if (bucket.size() > max) max = bucket.size();
+        }
+        return max;
+    }
+
+
+    /**
+     * Returns the total number of buckets in the set.
+     */
+    public int getNumberOfBuckets() {
+        return buckets.length;
+    }
+
+    /**
      * Creates and returns a new iterator over the elements in this set.
      * The iterator will traverse all buckets in order and all elements in each bucket.
      * 
