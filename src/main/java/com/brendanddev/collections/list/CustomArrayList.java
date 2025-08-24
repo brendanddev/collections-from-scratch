@@ -83,6 +83,24 @@ public class CustomArrayList<T> implements CustomCollection<T> {
         return false;
     }
 
+
+    /**
+     * Returns the element at the specified index in the list.
+     * 
+     * @param index The index of the element to retrieve.
+     * @return The element at the given index.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    @SuppressWarnings("unchecked")
+    public T get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        T element = (T) elements[index];
+        return element;
+    }
+
+
     /**
      * Returns the number of elements in the list.
      */
