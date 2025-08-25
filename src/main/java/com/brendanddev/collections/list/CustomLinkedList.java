@@ -4,7 +4,16 @@ import com.brendanddev.collections.core.CustomCollection;
 import com.brendanddev.collections.core.CustomIterator;
 
 /**
+ * A custom implementation of a generic doubly linked list.
  * 
+ * Time Complexity
+ * Add: O(1) - (At the end)
+ * Contains: O(n)
+ * Remove: O(n)
+ * Get: O(n)
+ * Set: O(n)
+ * RemoveAt: O(n)
+ * Clear: O(1)
  */
 public class CustomLinkedList<T> implements CustomCollection<T> {
     
@@ -112,6 +121,67 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
     }
 
     /**
+     * Returns the element at the specified index in the list.
+     * 
+     * @param index The index of the element to retrieve.
+     * @return The element at the specified index.
+     */
+    public T get(int index) {
+        checkIndex(index);
+        return nodeAt(index).value;
+    }
+
+    /**
+     * Replaces the element at the specified index with the given value.
+     * 
+     * @param index The index of the element to replace.
+     * @param element The new value to set at the specified index.
+     * @return The old value that was replaced.
+     */
+    public T set(int index, T element) {
+        checkIndex(index);
+        // Find node at the specified index
+        Node<T> targetNode = nodeAt(index);
+        // Save old value and replace with new
+        T oldValue = targetNode.value;
+        targetNode.value = element;
+        return oldValue;
+    }
+
+
+    /**
+     * Removes and returns the element at the specified index in the list.
+     * 
+     * Traverses the list to locate the node at the given index. Once found, it updates the links of the
+     * previous and next nodes to exclude the target node from the list. If the target node is the head or tail,
+     * the head or tail references are updated accordingly.
+     * 
+     * @param index The index of the element to remove.
+     * @return The value of the removed element.
+     */
+    public T removeAt(int index) {
+        checkIndex(index);
+        Node<T> targetNode = nodeAt(index);
+        T removedValue = targetNode.value;
+
+        // Update the previous nodes next pointer
+        if (targetNode.prev != null) {
+            targetNode.prev.next = targetNode.next;
+        } else {
+            head = targetNode.next;
+        }
+
+        // Update the next nodes previous pointer
+        if (targetNode.next != null) {
+            targetNode.next.prev = targetNode.prev;
+        } else {
+            tail = targetNode.prev;
+        }
+        size--;
+        return removedValue;
+    }
+
+    /**
      * Returns the number of elements in the list.
      */
     @Override
@@ -137,11 +207,44 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
     }
 
     /**
+     * Returns a string representation of the linked list.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("CustomLinkedList{ ");
+        Node<T> current = head;
+        while (current != null) {
+            sb.append(current.value);
+            if (current.next != null) {
+                sb.append(" <-> ");
+            }
+            current = current.next;
+        }
+        sb.append(" }");
+        return sb.toString();
+    }
+
+    /**
      * Returns an iterator to traverse the elements of the linked list.
      */
     @Override
     public CustomIterator<T> iterator() {
         return new CustomLinkedListIterator();
+    }
+
+
+
+    /**
+     * A helper method to check if an index is within the valid range for the list.
+     * 
+     * @param index The index to check.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    private void checkIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
     }
 
     /**
@@ -154,11 +257,13 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
      */
     private Node<T> nodeAt(int index) {
         Node<T> current;
+        // If index is in the first half of the list, start from head
         if (index < (size / 2)) {
             current = head;
             for (int i = 0; i < index; i++) {
                 current = current.next;
             }
+        // If index is in the second half, start from tail
         } else {
             current = tail;
             for (int i = size - 1; i > index; i--) {
