@@ -7,6 +7,7 @@ import com.brendanddev.collections.list.CustomArrayList;
 import com.brendanddev.collections.list.CustomLinkedList;
 import com.brendanddev.collections.map.CustomHashMap;
 import com.brendanddev.collections.performance.Benchmark;
+import com.brendanddev.collections.queue.CustomQueue;
 import com.brendanddev.collections.set.CustomHashSet;
 import com.brendanddev.collections.stack.CustomStack;
 
@@ -180,6 +181,33 @@ public class Main {
             }
             return null;
         });
+
+        System.out.println("-------------------------------------------------");
+
+        /** CustomQueue Benchmarks */
+        CustomQueue<Integer> customQueue = new CustomQueue<>();
+
+        Benchmark.measureWithResults("CustomQueue enqueue " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customQueue.enqueue(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomQueue peek " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customQueue.peek();
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomQueue dequeue " + n + " elements", () -> {
+            while (!customQueue.isEmpty()) {
+                customQueue.dequeue();
+            }
+            return null;
+        });
+
 
     }
 }

@@ -3,7 +3,7 @@ package com.brendanddev.collections.stack;
 import com.brendanddev.collections.list.CustomLinkedList;
 
 /**
- * A custom generic stack implementation.
+ * A custom generic implementation of a Stack using a linked list.
  * 
  * Time Complexity
  * Push: O(1)
