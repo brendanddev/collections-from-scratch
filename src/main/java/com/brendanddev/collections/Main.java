@@ -14,6 +14,7 @@ import com.brendanddev.collections.stack.CustomStack;
  * Main class to demonstrate and benchmark custom collection implementations.
  */
 public class Main {
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
 
         int n = 100_000;
