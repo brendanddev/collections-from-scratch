@@ -87,6 +87,13 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
         return size == 0;
     }
 
+    /**
+     * Returns an iterator to traverse the elements of the linked list.
+     */
+    @Override
+    public CustomIterator<T> iterator() {
+        return new CustomLinkedListIterator();
+    }
 
 
 
@@ -118,6 +125,37 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
          */
         Node(T value) {
             this(value, null, null);
+        }
+    }
+
+
+    /**
+     * Iterator implementation for the CustomLinkedList.
+     * Iterates from head to tail of the list.
+     */
+    private class CustomLinkedListIterator implements CustomIterator<T> {
+        private Node<T> current = head;
+
+        /**
+         * Checks if there are more elements to iterate over in the list.
+         * @return true if there are more elements, otherwise false.
+         */
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         * @return The next element.
+         * @throws IllegalStateException if there are no more elements to return.
+         */
+        @Override
+        public T next() {
+            if (current == null) throw new IllegalStateException("No more elements in the list");
+            T val = current.value;
+            current = current.next;
+            return val;
         }
     }
     
