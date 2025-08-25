@@ -1,5 +1,6 @@
 package com.brendanddev.collections.queue;
 
+import java.util.NoSuchElementException;
 
 /**
  * A custom generic implementation of a Priority Queue using a linked list.
@@ -58,6 +59,41 @@ public class CustomLinkedPriorityQueue<T> {
         }
     }
 
+    /**
+     * Removes and returns the element with the highest priority (lowest priority value).
+     * 
+     * @return The value of the removed element.
+     * @throws NoSuchElementException if the priority queue is empty.
+     */
+    public T dequeue() {
+        if (isEmpty()) throw new NoSuchElementException("PriorityQueue is empty");
+        
+        // Store the value of first node, and move first pointer to next node
+        T value = first.value;
+        first = first.next;
+
+        if (first != null) {
+            // If there is a new first node, disconnect its previous link
+            first.prev = null;
+        } else {
+            // If the queue is now empty, also clear the last pointer
+            last = null;
+        }
+        size--;
+        return value;
+    }
+
+    /**
+     * Returns the element with the highest priority without removing it.
+     * 
+     * @return The value of the element at the front of the queue.
+     * @throws NoSuchElementException if the priority queue is empty.
+     */
+    public T peek() {
+        if (isEmpty()) throw new NoSuchElementException("PriorityQueue is empty");
+        return first.value;
+    }
+
     /** 
      * Checks if the priority queue is empty.
      */
@@ -70,6 +106,14 @@ public class CustomLinkedPriorityQueue<T> {
      */
     public int size() {
         return size;
+    }
+
+    /**
+     * Clears all elements from the priority queue.
+     */
+    public void clear() {
+        first = last = null;
+        size = 0;
     }
 
 
