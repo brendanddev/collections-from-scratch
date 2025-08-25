@@ -301,6 +301,7 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
          * 
          * @param value The value to store in this node.
          */
+        @SuppressWarnings("unused")
         Node(T value) {
             this(value, null, null);
         }
