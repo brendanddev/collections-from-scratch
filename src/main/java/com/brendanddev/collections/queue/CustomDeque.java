@@ -94,16 +94,40 @@ public class CustomDeque<T> {
         return data;
     }
 
+    /**
+     * Returns the element at the front of the deque without removing it.
+     * 
+     * @return The value at the front of the deque.
+     * @throws NoSuchElementException if the deque is empty.
+     */
+    public T peekFirst() {
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");
+        return head.data;
+    }
 
+    /**
+     * Returns the element at the end of the deque without removing it.
+     * 
+     * @return The value at the end of the deque.
+     * @throws NoSuchElementException if the deque is empty.
+     */
+    public T peekLast() {
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");
+        return tail.data;
+    }
 
-
-
-
-
-
-
-
-
+    /**
+     * Checks if the deque contains a specific element.
+     * 
+     * @param element The element to search for.
+     * @return true if the element exists in the deque, otherwise false.
+     */
+    public boolean contains(T element) {
+        for (Node<T> current = head; current != null; current = current.next) {
+            if (current.data.equals(element)) return true;
+        }
+        return false;
+    }
 
     /** 
      * Checks if the deque is empty.
@@ -117,6 +141,33 @@ public class CustomDeque<T> {
      */
     public int size() {
         return size;
+    }
+
+    /**
+     * Clears all elements from the deque.
+     */
+    public void clear() {
+        head = tail = null;
+        size = 0;
+    }
+
+    /**
+     * Returns a string representation of the deque.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        Node<T> current = head;
+        while (current != null) {
+            sb.append(current.data);
+            if (current.next != null) {
+                sb.append(", ");
+            }
+            current = current.next;
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
 
