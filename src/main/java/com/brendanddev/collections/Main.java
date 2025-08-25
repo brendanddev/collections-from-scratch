@@ -7,6 +7,7 @@ import com.brendanddev.collections.list.CustomArrayList;
 import com.brendanddev.collections.list.CustomLinkedList;
 import com.brendanddev.collections.map.CustomHashMap;
 import com.brendanddev.collections.performance.Benchmark;
+import com.brendanddev.collections.queue.CustomDeque;
 import com.brendanddev.collections.queue.CustomQueue;
 import com.brendanddev.collections.set.CustomHashSet;
 import com.brendanddev.collections.stack.CustomStack;
@@ -207,6 +208,61 @@ public class Main {
             }
             return null;
         });
+
+        System.out.println("-------------------------------------------------");
+
+        CustomDeque<Integer> customDeque = new CustomDeque<>();
+
+        Benchmark.measureWithResults("CustomDeque addFirst " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customDeque.addFirst(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomDeque addLast " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customDeque.addLast(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomDeque peekFirst " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customDeque.peekFirst();
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomDeque peekLast " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customDeque.peekLast();
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomDeque removeFirst " + n + " elements", () -> {
+            while (!customDeque.isEmpty()) {
+                customDeque.removeFirst();
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomDeque removeLast " + n + " elements", () -> {
+            while (!customDeque.isEmpty()) {
+                customDeque.removeLast();
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomDeque contains " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customDeque.contains(i);
+            }
+            return null;
+        });
+
+
 
 
     }
