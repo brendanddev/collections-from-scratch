@@ -4,17 +4,21 @@ import java.util.Random;
 
 import com.brendanddev.collections.core.CustomIterator;
 import com.brendanddev.collections.list.CustomArrayList;
+import com.brendanddev.collections.list.CustomLinkedList;
 import com.brendanddev.collections.map.CustomHashMap;
 import com.brendanddev.collections.performance.Benchmark;
 import com.brendanddev.collections.set.CustomHashSet;
 
+/**
+ * Main class to demonstrate and benchmark custom collection implementations.
+ */
 public class Main {
     public static void main(String[] args) {
 
         int n = 100_000;
         Random random = new Random();
 
-        // CustomArrayList
+        /** CustomArrayList benchmarks */
         CustomArrayList<Integer> customArrayList = new CustomArrayList<>();
 
         Benchmark.measureWithResults("CustomArrayList add " + n + " elements", () -> {
@@ -47,7 +51,9 @@ public class Main {
         });
 
         System.out.println("-------------------------------------------------");
-        // CustomHashSet
+        
+        
+        /** CustomHashSet benchmarks */
         CustomHashSet<Integer> hashSet = new CustomHashSet<>();
 
         Benchmark.measureWithResults("CustomHashSet add " + n + " elements", () -> {
@@ -68,7 +74,6 @@ public class Main {
             CustomIterator<Integer> it = hashSet.iterator();
             while (it.hasNext()) {
                 Integer val = it.next();
-                // no-op
             }
             return null;
         });
@@ -79,9 +84,11 @@ public class Main {
             }
             return null;
         });
+
         System.out.println("-------------------------------------------------");
         
-        // CustomHashMap
+
+        /** CustomHashMap benchmarks */
         CustomHashMap<Integer, Integer> hashMap = new CustomHashMap<>();
 
         Benchmark.measureWithResults("CustomHashMap put " + n + " elements", () -> {
@@ -100,7 +107,6 @@ public class Main {
 
         Benchmark.measureWithResults("CustomHashMap iteration", () -> {
             for (int i = 0; i < hashMap.size(); i++) {
-                // iterate through keys using containsKey or similar if iterator isn't implemented
                 hashMap.containsKey(i);
             }
             return null;
@@ -113,5 +119,38 @@ public class Main {
             return null;
         });
 
+        System.out.println("-------------------------------------------------");
+
+        /** CustomLinkedList benchmarks */
+        CustomLinkedList<Integer> customLinkedList = new CustomLinkedList<>();
+
+        Benchmark.measureWithResults("CustomLinkedList add " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customLinkedList.add(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomLinkedList contains " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customLinkedList.contains(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomLinkedList get " + n + " random elements", () -> {
+            for (int i = 0; i < n; i++) {
+                int idx = random.nextInt(customLinkedList.size());
+                customLinkedList.get(idx);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomLinkedList remove " + n + " elements", () -> {
+            while (!customLinkedList.isEmpty()) {
+                customLinkedList.removeAt(customLinkedList.size() - 1);
+            }
+            return null;
+        });
     }
 }
