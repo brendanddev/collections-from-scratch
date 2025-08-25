@@ -8,6 +8,7 @@ import com.brendanddev.collections.list.CustomLinkedList;
 import com.brendanddev.collections.map.CustomHashMap;
 import com.brendanddev.collections.performance.Benchmark;
 import com.brendanddev.collections.set.CustomHashSet;
+import com.brendanddev.collections.stack.CustomStack;
 
 /**
  * Main class to demonstrate and benchmark custom collection implementations.
@@ -152,5 +153,32 @@ public class Main {
             }
             return null;
         });
+
+        System.out.println("-------------------------------------------------");
+
+        /** CustomStack Benchmarks */
+        CustomStack<Integer> customStack = new CustomStack<>();
+
+        Benchmark.measureWithResults("CustomStack push " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customStack.push(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomStack peek " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customStack.peek();
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomStack pop " + n + " elements", () -> {
+            while (!customStack.isEmpty()) {
+                customStack.pop();
+            }
+            return null;
+        });
+
     }
 }

@@ -4,6 +4,14 @@ import com.brendanddev.collections.list.CustomLinkedList;
 
 /**
  * A custom generic stack implementation.
+ * 
+ * Time Complexity
+ * Push: O(1)
+ * Pop: O(1)
+ * Peek: O(1)
+ * IsEmpty: O(1)
+ * Size: O(1)
+ * Clear: O(1)
  */
 public class CustomStack<T> {
 
