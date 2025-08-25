@@ -66,10 +66,50 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
         return false;
     }
 
+    /**
+     * Removes the first occurrence of the specified element from the list if it exists.
+     * 
+     * Traverses the list starting from the head. If the element is found, the node is removed by
+     * updating the links of its previous and next nodes. If the node to remove is the head or tail,
+     * the head or tail references are updated accordingly.
+     * 
+     * @param element The element to remove from the list.
+     * @return true if the element was found and removed, otherwise false.
+     */
+    @Override
+    public boolean remove(T element) {
+        if (isEmpty()) return false;
 
+        // Start at the head and traverse the list
+        Node<T> current = head;
+        while (current != null) {
+            // Check if current node holds the element to remove
+            if (current.value.equals(element)) {
+                // Element found
+                if (current.prev != null) {
+                    // Update the link from the previous node if it exists
+                    current.prev.next = current.next;
+                } else {
+                    // If no previous node, we are at the head
+                    head = current.next;
+                }
 
+                // Update the link from the next node if it exists
+                if (current.next != null) {
+                    current.next.prev = current.prev;
+                } else {
+                    // If no next node, we are removing the tail
+                    tail = current.prev;
+                }
 
-
+                size--;
+                return true;
+            }
+            // Move to the next node
+            current = current.next;
+        }
+        return false;
+    }
 
     /**
      * Returns the number of elements in the list.
