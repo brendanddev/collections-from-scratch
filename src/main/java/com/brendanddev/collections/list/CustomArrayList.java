@@ -7,6 +7,12 @@ import com.brendanddev.collections.core.CustomIterator;
 
 /**
  * A custom generic array-backed list implementation.
+ * 
+ * Time Complexity
+ * Add: O(1) amortized (O(n) when resizing)
+ * Contains: O(n)
+ * Get: O(1)
+ * Remove: O(n) (due to shifting elements)
  */
 public class CustomArrayList<T> implements CustomCollection<T> {
     
