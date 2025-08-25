@@ -38,5 +38,47 @@ public class CustomStack<T> {
         // Remove last element (top of stack)
         return linkedList.removeAt(linkedList.size() - 1);
     }
+
+    /**
+     * Returns the top element of the stack without removing it.
+     * 
+     * @return The value at the top of the stack.
+     * @throws IllegalStateException if the stack is empty.
+     */
+    public T peek() {
+        if (linkedList.isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return linkedList.get(linkedList.size() - 1);
+    }
+
+    /**
+     * Returns true if the stack is empty, otherwise false.
+     */
+    public boolean isEmpty() {
+        return linkedList.isEmpty();
+    }
+
+    /** 
+     * Returns the number of elements in the stack.
+     */
+    public int size() {
+        return linkedList.size();
+    }
+
+    /**
+     * Removes all elements from the stack.
+     */
+    public void clear() {
+        linkedList.clear();
+    }
+
+    /**
+     * Returns a string representation of the stack.
+     */
+    @Override
+    public String toString() {
+        return "CustomStack" + linkedList.toString();
+    }
     
 }
