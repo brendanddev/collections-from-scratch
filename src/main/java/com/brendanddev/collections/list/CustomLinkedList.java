@@ -47,10 +47,29 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
         return true;
     }
 
+    /**
+     * Checks if the list contains the specified element.
+     * 
+     * @param element The element to search for in the list.
+     * @return true if the element is found, otherwise false.
+     */
+    @Override
+    public boolean contains(T element) {
+        if (isEmpty()) return false;
+
+        // Traverse the list to find the element starting from the head
+        for (Node<T> current = head; current != null; current = current.next) {
+            if (current.value.equals(element)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
 
-    
+
+
 
     /**
      * Returns the number of elements in the list.
