@@ -8,6 +8,7 @@ import com.brendanddev.collections.list.CustomLinkedList;
 import com.brendanddev.collections.map.CustomHashMap;
 import com.brendanddev.collections.performance.Benchmark;
 import com.brendanddev.collections.queue.CustomDeque;
+import com.brendanddev.collections.queue.CustomLinkedPriorityQueue;
 import com.brendanddev.collections.queue.CustomQueue;
 import com.brendanddev.collections.set.CustomHashSet;
 import com.brendanddev.collections.stack.CustomStack;
@@ -262,8 +263,42 @@ public class Main {
             return null;
         });
 
+        System.out.println("-------------------------------------------------");
 
+        /**  CustomLinkedPriorityQueue benchmarks */
+        CustomLinkedPriorityQueue<Integer> customPriorityQueue = new CustomLinkedPriorityQueue<>();
 
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue enqueue " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customPriorityQueue.enqueue(i, i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue peek " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                if (!customPriorityQueue.isEmpty()) {
+                    customPriorityQueue.peek();
+                }
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue contains " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customPriorityQueue.contains(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue dequeue " + n + " elements", () -> {
+            while (!customPriorityQueue.isEmpty()) {
+                customPriorityQueue.dequeue();
+            }
+            return null;
+        });
+
+        System.out.println("-------------------------------------------------");
 
     }
 }
