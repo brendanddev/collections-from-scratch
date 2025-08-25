@@ -1,5 +1,6 @@
 package com.brendanddev.collections.queue;
 
+import java.util.NoSuchElementException;
 
 /**
  * A custom generic implementation of a Deque (double-ended queue).
@@ -48,6 +49,50 @@ public class CustomDeque<T> {
         size++;
     }
 
+    /**
+     * Removes and returns the element at the front of the deque.
+     * 
+     * @return The value at the front of the deque.
+     * @throws NoSuchElementException if the deque is empty.
+     */
+    public T removeFirst() {
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");
+        // Retrieve data and move head forward
+        T data = head.data;
+        head = head.next;
+
+        if (head != null) {
+            // If deque still has elements, disconnect previous link of the new head
+            head.prev = null;
+        } else {
+            // Deque is now empty, so update tail as well
+            tail = null;
+        }
+        size--;
+        return data;
+    }
+
+    /**
+     * Removes and returns the element at the end of the deque.
+     * 
+     * @return The value at the end of the deque.
+     * @throws NoSuchElementException if the deque is empty.
+     */
+    public T removeLast() {
+        if (isEmpty()) throw new NoSuchElementException("Deque is empty");
+        T data = tail.data;
+        tail = tail.prev;
+
+        if (tail != null) {
+            // If deque still has elements, disconnect next link of the new tail
+            tail.next = null;
+        } else {
+            // Deque is now empty, so update head as well
+            head = null;
+        }
+        size--;
+        return data;
+    }
 
 
 
