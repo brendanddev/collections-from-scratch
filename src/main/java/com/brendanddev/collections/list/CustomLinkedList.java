@@ -128,11 +128,44 @@ public class CustomLinkedList<T> implements CustomCollection<T> {
     }
 
     /**
+     * Removes all elements from the list, resetting it to an empty state.
+     */
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    /**
      * Returns an iterator to traverse the elements of the linked list.
      */
     @Override
     public CustomIterator<T> iterator() {
         return new CustomLinkedListIterator();
+    }
+
+    /**
+     * A helper method to find the node at a specific index.
+     * If the index is in the first half of the list, traversal starts from the head.
+     * If the index is in the second half, traversal starts from the tail.
+     * 
+     * @param index The index of the node to retrieve.
+     * @return The node at the specified index.
+     */
+    private Node<T> nodeAt(int index) {
+        Node<T> current;
+        if (index < (size / 2)) {
+            current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+        } else {
+            current = tail;
+            for (int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+        }
+        return current;
     }
 
 
