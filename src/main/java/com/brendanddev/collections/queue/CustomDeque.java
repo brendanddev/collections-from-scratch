@@ -2,8 +2,21 @@ package com.brendanddev.collections.queue;
 
 import java.util.NoSuchElementException;
 
+import com.brendanddev.collections.core.CustomIterator;
+
 /**
  * A custom generic implementation of a Deque (double-ended queue).
+ * 
+ * Time Complexity
+ * Add First: O(1)
+ * Add Last: O(1)
+ * Remove First: O(1)
+ * Remove Last: O(1)
+ * Peek First: O(1)
+ * Peek Last: O(1)
+ * Contains: O(n)
+ * IsEmpty: O(1)
+ * Size: O(1)
  */
 public class CustomDeque<T> {
 
@@ -170,6 +183,15 @@ public class CustomDeque<T> {
         return sb.toString();
     }
 
+    /**
+     * Returns an iterator to traverse the deque from front to back.
+     * 
+     * @return A CustomIterator for the deque.
+     */
+    public CustomIterator<T> iterator() {
+        return new CustomDequeIterator();
+    }
+
 
     /**
      * A doubly linked Node used internally by the Deque.
@@ -186,6 +208,30 @@ public class CustomDeque<T> {
          */
         Node(T data) {
             this.data = data;
+        }
+    }
+
+
+    private class CustomDequeIterator implements CustomIterator<T> {
+        private Node<T> current = head;
+
+        /**
+         * Checks if there are more elements to iterate over in the deque.
+         */
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         */
+        @Override
+        public T next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            T data = current.data;
+            current = current.next;
+            return data;
         }
     }
     
