@@ -7,6 +7,11 @@ import java.util.function.Supplier;
  */
 public class Benchmark {
 
+    private static final String RESET = "\u001B[0m";
+    private static final String RED = "\u001B[31m";
+    private static final String GREEN = "\u001B[32m";
+    private static final String YELLOW = "\u001B[33m";
+
     /**
      * Measures the time taken to execute a runnable.
      * 
@@ -32,8 +37,27 @@ public class Benchmark {
         long start = System.nanoTime();
         T result = operation.get();
         long end = System.nanoTime();
-        System.out.printf("%s took %.3f ms%n", name, (end - start) / 1e6);
+        double elapsedMs = (end - start) / 1e6;
+
+        System.out.printf("%s took %s%.3f ms%s%n", 
+                name, getColorForTime(elapsedMs), elapsedMs, RESET);
         return result;
+    }
+
+    /**
+     * Helper to get color code based on elapsed time.
+     * 
+     * @param elapsedMs The elapsed time in milliseconds.
+     * @return The ANSI color code string for the elapsed time.
+     */
+    private static String getColorForTime(double elapsedMs) {
+        if (elapsedMs > 30) {
+            return RED;
+        } else if (elapsedMs >= 7) {
+            return YELLOW;
+        } else {
+            return GREEN;
+        }
     }
 
 
