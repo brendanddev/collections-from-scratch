@@ -31,7 +31,6 @@ public class CustomLinkedPriorityQueue<T> {
      */
     public void enqueue(T value, int priority) {
         Node<T> newNode = new Node<>(value, priority);
-        size++;
 
         // If queue is empty, new node is both the first and last node
         if (isEmpty()) {
@@ -66,6 +65,7 @@ public class CustomLinkedPriorityQueue<T> {
             newNode.next = current;
             current.prev = newNode;
         }
+        size++;
     }
 
     /**
