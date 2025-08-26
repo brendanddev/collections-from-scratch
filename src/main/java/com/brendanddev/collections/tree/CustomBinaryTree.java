@@ -14,6 +14,7 @@ public class CustomBinaryTree<T> {
 
     private Node<T> root;
     private final CustomComparator<T> comparator;
+    private int size = 0;
 
     /**
      * Constructs an empty CustomBinaryTree.
@@ -31,7 +32,10 @@ public class CustomBinaryTree<T> {
      * @param value The value to insert into the tree.
      */
     public void insert(T value) {
-        root = insertRecursive(root, value);
+        if (!contains(value)) {
+            root = insertRecursive(root, value);
+            size++;
+        }
     }
 
     /**
@@ -107,7 +111,10 @@ public class CustomBinaryTree<T> {
      * @param value The value to remove from the tree.
      */
     public void remove(T value) {
-        root = removeRecursive(root, value);
+        if (contains(value)) {
+            root = removeRecursive(root, value);
+            size--;
+        }
     }
 
     /**
@@ -173,6 +180,28 @@ public class CustomBinaryTree<T> {
             current = current.left;
         }
         return current.value;
+    }
+
+    /** 
+     * Returns the number of elements in the binary tree.
+     */
+    public int size() {
+        return size;
+    }
+
+    /** 
+     * Returns true if the binary tree is empty, otherwise false.
+     */
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    /**
+     * Clears all elements from the binary tree by resetting the root to null and size to zero.
+     */
+    public void clear() {
+        root = null;
+        size = 0;
     }
 
 
