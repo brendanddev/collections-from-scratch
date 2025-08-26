@@ -6,8 +6,9 @@ This project explores **Data Structures and Collections in Java** by implementin
 
 ## Overview
 
-This repository contains implementations of common data structures such as lists, sets, maps, stacks, queues, heaps, and trees.  
+This repository contains implementations of common data structures such as lists, sets, maps, stacks, queues, heaps, and trees.
 Each data structure is built from first principles, including custom iterators and benchmarking utilities to compare performance.
+Performance comparison utilities that benchmark custom data structures against Java's built-in counterparts (e.g., `PriorityQueue` for heaps, `TreeSet` for binary trees) using shuffled datasets to ensure fair testing.
 
 ---
 
@@ -57,8 +58,15 @@ src/main/java/com/brendanddev/collections
 ├── tree/ # Hierarchical structures
 │ └── CustomBinaryTree.java
 │
-├── performance/ # Benchmarking utilities
-│ └── Benchmark.java
+├── performance/    # Benchmarking utilities
+│   ├── Benchmark.java
+│   ├── CompareLists.java
+│   ├── CompareQueues.java
+│   ├── CompareStack.java
+│   ├── CompareHeaps.java
+│   ├── CompareMaps.java
+│   ├── CompareSets.java
+│   └── CompareTrees.java
 │
 └── Main.java # Entry point for demos/benchmarks
 ```
