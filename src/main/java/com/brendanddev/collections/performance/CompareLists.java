@@ -60,7 +60,8 @@ public class CompareLists {
 
         // Compare removing n elements
         Benchmark.measureWithResults("CustomArrayList remove " + n + " elements", () -> {
-            while (!customArrayList.isEmpty()) customArrayList.remove(customArrayList.size() - 1);
+            // Uses removeAt to avoid O(n^2) complexity from shifting elements
+            while (!customArrayList.isEmpty()) customArrayList.removeAt(customArrayList.size() - 1);
             return null;
         });
         Benchmark.measureWithResults("Java ArrayList remove " + n + " elements", () -> {
@@ -77,6 +78,8 @@ public class CompareLists {
     public static void benchmarkLinkedLists(int n) {
         CustomLinkedList<Integer> customLinkedList = new CustomLinkedList<>();
         LinkedList<Integer> javaLinkedList = new LinkedList<>();
+
+        // int sampleSize = Math.min(1000, n);
 
         // Compare adding n elements
         Benchmark.measureWithResults("CustomLinkedList add " + n + " elements", () -> {
@@ -100,14 +103,14 @@ public class CompareLists {
 
         // Compare getting n random elements
         Benchmark.measureWithResults("CustomLinkedList get " + n + " random elements", () -> {
-            for (int i = 0; i < n; i++) {   
+            for (int i = 0; i < n; i++) {
                 int idx = random.nextInt(customLinkedList.size());
                 customLinkedList.get(idx);
             }
             return null;
         });
         Benchmark.measureWithResults("Java LinkedList get " + n + " random elements", () -> {
-            for (int i = 0; i < n; i++) {   
+            for (int i = 0; i < n; i++) {
                 int idx = random.nextInt(javaLinkedList.size());
                 javaLinkedList.get(idx);
             }
