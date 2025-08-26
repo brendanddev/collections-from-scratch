@@ -1,7 +1,7 @@
 package com.brendanddev.collections.tree;
 
 
-
+import com.brendanddev.collections.core.CustomComparator;
 
 /**
  * A custom generic implementation of a Binary Tree.
@@ -11,6 +11,58 @@ package com.brendanddev.collections.tree;
  * values greater than the nodes value.
  */
 public class CustomBinaryTree<T> {
+
+    private Node<T> root;
+    private final CustomComparator<T> comparator;
+
+    /**
+     * Constructs an empty CustomBinaryTree.
+     * 
+     * @param comparator The CustomComparator used for ordering the elements in the tree.
+     */
+    public CustomBinaryTree(CustomComparator<T> comparator) {
+        this.root = null;
+        this.comparator = comparator;
+    }
+
+    /**
+     * Inserts a new value into the binary tree.
+     * 
+     * @param value The value to insert into the tree.
+     */
+    public void insert(T value) {
+        root = insertRecursive(root, value);
+    }
+
+    /**
+     * Helper to recursively insert a value into the subtree rooted at the given node.
+     * 
+     * @param current The current node in the recursion.
+     * @param value The value to insert.
+     * @return The node that should be at this position in the tree (May be a new node).
+     */
+    private Node<T> insertRecursive(Node<T> current, T value) {
+        // Base case - If current node is null, we've found the insertion point
+        // Create a new node with the value and return it
+        if (current == null) {
+            return new Node<>(value);
+        }
+
+        // Compare the value to insert with the current nodes value
+        int cmp = comparator.compare(value, current.value);
+
+        if (cmp < 0) {
+            // Value is smaller, insert into left subtree
+            current.left = insertRecursive(current.left, value);
+        } else if (cmp > 0) {
+            // Value is larger, insert into right subtree
+            current.right = insertRecursive(current.right, value);
+        }
+
+        return current;
+    }
+
+
 
 
 
