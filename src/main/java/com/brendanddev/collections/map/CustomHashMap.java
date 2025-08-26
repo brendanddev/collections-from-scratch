@@ -1,6 +1,7 @@
 package com.brendanddev.collections.map;
 
-import java.util.ArrayList;
+
+import com.brendanddev.collections.list.CustomArrayList;
 
 /**
  * A custom generic hash based implementation of a Map using an array of buckets.
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 public class CustomHashMap<K, V> {
 
-    private ArrayList<Entry<K, V>>[] buckets;
+    private CustomArrayList<Entry<K, V>>[] buckets;
     private static final int DEFAULT_BUCKETS = 16;
     private int size = 0;
     public static final double AVERAGE_BUCKET_SIZE = 3;
@@ -25,9 +26,9 @@ public class CustomHashMap<K, V> {
      */
     @SuppressWarnings("unchecked")
     public CustomHashMap() {
-        buckets = new ArrayList[DEFAULT_BUCKETS];
+        buckets = new CustomArrayList[DEFAULT_BUCKETS];
         for (int i = 0; i < DEFAULT_BUCKETS; i++) {
-            buckets[i] = new ArrayList<>();
+            buckets[i] = new CustomArrayList<>();
         }
     }
 
@@ -58,10 +59,11 @@ public class CustomHashMap<K, V> {
     public V put(K key, V value) {
         // Compute bucket index for this key using its hash code
         int index = getHash(key, buckets.length);
-        ArrayList<Entry<K, V>> bucket = buckets[index];
+        CustomArrayList<Entry<K, V>> bucket = buckets[index];
 
         // Iterate over existing entries in the bucket to see if the key already exists
-        for (Entry<K, V> entry : bucket) {
+        for (int i = 0; i < bucket.size(); i++) {
+            Entry<K, V> entry = bucket.get(i);
             if (entry.key.equals(key)) {
                 // Key exists, update its value and return old value
                 V oldValue = entry.value;
@@ -91,10 +93,11 @@ public class CustomHashMap<K, V> {
     public V get(K key) {
         // Compute bucket index for the key
         int index = getHash(key, buckets.length);
-        ArrayList<Entry<K, V>> bucket = buckets[index];
+        CustomArrayList<Entry<K, V>> bucket = buckets[index];
 
         // Iterate through the entries in this bucket
-        for (Entry<K, V> entry : bucket) {
+        for (int i = 0; i < bucket.size(); i++) {
+            Entry<K, V> entry = bucket.get(i);
             if (entry.key.equals(key)) {
                 // Key found, return value
                 return entry.value;
@@ -112,11 +115,11 @@ public class CustomHashMap<K, V> {
      */
     public boolean remove(K key) {
         int index = getHash(key, buckets.length);
-        ArrayList<Entry<K, V>> bucket = buckets[index];
+        CustomArrayList<Entry<K, V>> bucket = buckets[index];
 
         for (int i = 0; i < bucket.size(); i++) {
             if (bucket.get(i).key.equals(key)) {
-                bucket.remove(i);
+                bucket.removeAt(i);
                 size--;
                 return true;
             }
@@ -132,14 +135,15 @@ public class CustomHashMap<K, V> {
      */
     public boolean containsKey(K key) {
         int index = getHash(key, buckets.length);
-        ArrayList<Entry<K, V>> bucket = buckets[index];
+        CustomArrayList<Entry<K, V>> bucket = buckets[index];
 
-        for (Entry<K, V> entry : bucket) {
+        // Iterate through the entries in this bucket to find the key
+        for (int i = 0; i < bucket.size(); i++) {
+            Entry<K, V> entry = bucket.get(i);
             if (entry.key.equals(key)) {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -170,14 +174,16 @@ public class CustomHashMap<K, V> {
         int newBucketCount = buckets.length * 2;
 
         // Create a new array of buckets, initializing each as an empty ArrayList
-        ArrayList<Entry<K, V>>[] newBuckets = new ArrayList[newBucketCount];
+        CustomArrayList<Entry<K, V>>[] newBuckets = new CustomArrayList[newBucketCount];
         for (int i = 0; i < newBucketCount; i++) {
-            newBuckets[i] = new ArrayList<>();
+            newBuckets[i] = new CustomArrayList<>();
         }
 
         // Rehash each existing entry into the appropriate new bucket
-        for (ArrayList<Entry<K, V>> bucket : buckets) {
-            for (Entry<K, V> entry : bucket) {
+        for (int b = 0; b < buckets.length; b++) {
+            CustomArrayList<Entry<K, V>> bucket = buckets[b];
+            for (int i = 0; i < bucket.size(); i++) {
+                Entry<K, V> entry = bucket.get(i);
                 int newIndex = getHash(entry.key, newBucketCount);
                 newBuckets[newIndex].add(entry);
             }
