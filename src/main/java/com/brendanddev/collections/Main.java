@@ -1,11 +1,10 @@
 package com.brendanddev.collections;
 
-import java.util.HashSet;
 import java.util.Random;
 
 import com.brendanddev.collections.performance.CompareLists;
 import com.brendanddev.collections.performance.CompareSets;
-import com.brendanddev.collections.set.CustomHashSet;
+
 /**
  * Main class to demonstrate and benchmark custom collection implementations.
  */
@@ -19,7 +18,7 @@ public class Main {
 
         CompareLists.benchmarkLists(n);
         System.err.println("-------------------------------------------------");
-        // CompareLists.benchmarkLinkedLists(n);
+        CompareLists.benchmarkLinkedLists(n);
         System.err.println("-------------------------------------------------");
         CompareSets.benchmarkSets(n);
         System.err.println("-------------------------------------------------");
@@ -51,49 +50,8 @@ public class Main {
         // }
 
         // long startTime = System.nanoTime();
-        
-        // /** CustomHashSet benchmarks */
-        // CustomHashSet<Integer> hashSet = new CustomHashSet<>();
+                
 
-
-
-    
-
-        
-
-        // System.out.println("-------------------------------------------------");
-        
-
-        // /** CustomHashMap benchmarks */
-        // CustomHashMap<Integer, Integer> hashMap = new CustomHashMap<>();
-
-        // Benchmark.measureWithResults("CustomHashMap put " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         hashMap.put(i, i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomHashMap get " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         hashMap.get(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomHashMap iteration", () -> {
-        //     for (int i = 0; i < hashMap.size(); i++) {
-        //         hashMap.containsKey(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomHashMap remove " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         hashMap.remove(i);
-        //     }
-        //     return null;
-        // });
 
         // System.out.println("-------------------------------------------------");
 
