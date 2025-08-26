@@ -2,13 +2,8 @@ package com.brendanddev.collections.performance;
 
 import java.util.Random;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
 import com.brendanddev.collections.list.CustomArrayList;
 import com.brendanddev.collections.list.CustomLinkedList;
