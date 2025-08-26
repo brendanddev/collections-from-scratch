@@ -17,6 +17,8 @@ Each data structure is built from first principles, including custom iterators a
 - Array-based and linked implementations (`CustomArrayList`, `CustomLinkedList`)
 - Hash-based Collections (`CustomHashSet`, `CustomHashMap`)
 - Stack, Queue, and Deque implementations (`CustomStack`, `CustomQueue`, `CustomDeque`)
+- Tree structures (`CustomBinaryTree`)
+- Heap implementations (`CustomHeapList`)
 - Benchmarking utilities (`Benchmark.java`)  
 
 ---
