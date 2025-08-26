@@ -2,6 +2,7 @@ package com.brendanddev.collections;
 
 import java.util.Random;
 
+import com.brendanddev.collections.performance.CompareHeaps;
 import com.brendanddev.collections.performance.CompareLists;
 import com.brendanddev.collections.performance.CompareMaps;
 import com.brendanddev.collections.performance.CompareQueues;
@@ -36,7 +37,9 @@ public class Main {
         // System.out.println("-------------------------------------------------");
         // CompareQueues.benchmarkDeques(n);
         // System.out.println("-------------------------------------------------");
-        CompareQueues.benchmarkPriorityQueues(n);
+        // CompareQueues.benchmarkPriorityQueues(n);
+        // System.out.println("-------------------------------------------------");
+        CompareHeaps.benchmarkHeaps(n);
 
 
         // Total time metrics
@@ -48,34 +51,6 @@ public class Main {
 
 
 
-
-
-    
-
-
-        // /** CustomHeapList benchmarks */
-        // CustomHeapList<Integer> customHeapList = new CustomHeapList<>();
-
-        // Benchmark.measureWithResults("CustomHeapList add " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customHeapList.add(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomHeapList contains " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customHeapList.contains(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomHeapList remove " + n + " elements", () -> {
-        //     while (!customHeapList.isEmpty()) {
-        //         customHeapList.remove(customHeapList.iterator().next());
-        //     }
-        //     return null;
-        // });
 
         // System.out.println("-------------------------------------------------");
 
