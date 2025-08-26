@@ -89,7 +89,6 @@ public class CustomArrayList<T> implements CustomCollection<T> {
         return false;
     }
 
-
     /**
      * Returns the element at the specified index in the list.
      * 
@@ -104,6 +103,22 @@ public class CustomArrayList<T> implements CustomCollection<T> {
         }
         T element = (T) elements[index];
         return element;
+    }
+
+    /**
+     * Sets the element at the specified index in the list.
+     * 
+     * @param index The index to set the element at.
+     * @param element The element to set.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     * @throws IllegalArgumentException if the element is null.
+     */
+    public void set(int index, T element) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        if (element == null) throw new IllegalArgumentException("Null elements not allowed");
+        elements[index] = element;
     }
 
 
