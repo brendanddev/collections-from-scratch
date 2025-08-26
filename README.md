@@ -70,3 +70,20 @@ src/main/java/com/brendanddev/collections
 │
 └── Main.java # Entry point for demos/benchmarks
 ```
+
+---
+
+## Usage
+
+### Running the Demos
+You can run the `Main` class to see basic demos of your custom collections in action:
+
+```bash
+mvn compile exec:java -Dexec.mainClass="com.brendanddev.collections.Main"
+```
+
+This will compile the project and run the main entry point. You can modify Main.java to call any custom collection and test basic operations.
+
+### Running Benchmarks
+
+The `performance` package contains benchmarking utilities to compare your custom implementations with standard Java collections. Each `Compare*.java` class runs performance tests for a specific data structure.
