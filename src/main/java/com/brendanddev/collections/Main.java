@@ -13,6 +13,7 @@ import com.brendanddev.collections.queue.CustomLinkedPriorityQueue;
 import com.brendanddev.collections.queue.CustomQueue;
 import com.brendanddev.collections.set.CustomHashSet;
 import com.brendanddev.collections.stack.CustomStack;
+import com.brendanddev.collections.tree.CustomBinaryTree;
 
 /**
  * Main class to demonstrate and benchmark custom collection implementations.
@@ -25,313 +26,339 @@ public class Main {
         Random random = new Random();
         long startTime = System.nanoTime();
 
-        /** CustomArrayList benchmarks */
-        CustomArrayList<Integer> customArrayList = new CustomArrayList<>();
+        // /** CustomArrayList benchmarks */
+        // CustomArrayList<Integer> customArrayList = new CustomArrayList<>();
 
-        Benchmark.measureWithResults("CustomArrayList add " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customArrayList.add(i);
-            }
-            return null;
-        });
+        // Benchmark.measureWithResults("CustomArrayList add " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customArrayList.add(i);
+        //     }
+        //     return null;
+        // });
 
-        Benchmark.measureWithResults("CustomArrayList contains " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customArrayList.contains(i);
-            }
-            return null;
-        });
+        // Benchmark.measureWithResults("CustomArrayList contains " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customArrayList.contains(i);
+        //     }
+        //     return null;
+        // });
 
-        Benchmark.measureWithResults("CustomArrayList get " + n + " random elements", () -> {
-            for (int i = 0; i < n; i++) {
-                int idx = random.nextInt(customArrayList.size());
-                customArrayList.get(idx);
-            }
-            return null;
-        });
+        // Benchmark.measureWithResults("CustomArrayList get " + n + " random elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         int idx = random.nextInt(customArrayList.size());
+        //         customArrayList.get(idx);
+        //     }
+        //     return null;
+        // });
 
-        Benchmark.measureWithResults("CustomArrayList remove " + n + " elements", () -> {
-            while (!customArrayList.isEmpty()) {
-                customArrayList.remove(customArrayList.size() - 1);
-            }
-            return null;
-        });
+        // Benchmark.measureWithResults("CustomArrayList remove " + n + " elements", () -> {
+        //     while (!customArrayList.isEmpty()) {
+        //         customArrayList.remove(customArrayList.size() - 1);
+        //     }
+        //     return null;
+        // });
 
-        System.out.println("-------------------------------------------------");
+        // System.out.println("-------------------------------------------------");
         
         
-        /** CustomHashSet benchmarks */
-        CustomHashSet<Integer> hashSet = new CustomHashSet<>();
+        // /** CustomHashSet benchmarks */
+        // CustomHashSet<Integer> hashSet = new CustomHashSet<>();
 
-        Benchmark.measureWithResults("CustomHashSet add " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                hashSet.add(i);
-            }
-            return null;
-        });
+        // Benchmark.measureWithResults("CustomHashSet add " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         hashSet.add(i);
+        //     }
+        //     return null;
+        // });
 
-        Benchmark.measureWithResults("CustomHashSet contains " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                hashSet.contains(i);
-            }
-            return null;
-        });
+        // Benchmark.measureWithResults("CustomHashSet contains " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         hashSet.contains(i);
+        //     }
+        //     return null;
+        // });
 
-        Benchmark.measureWithResults("CustomHashSet iteration", () -> {
-            CustomIterator<Integer> it = hashSet.iterator();
-            while (it.hasNext()) {
-                Integer val = it.next();
-            }
-            return null;
-        });
+        // Benchmark.measureWithResults("CustomHashSet iteration", () -> {
+        //     CustomIterator<Integer> it = hashSet.iterator();
+        //     while (it.hasNext()) {
+        //         Integer val = it.next();
+        //     }
+        //     return null;
+        // });
 
-        Benchmark.measureWithResults("CustomHashSet remove " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                hashSet.remove(i);
-            }
-            return null;
-        });
+        // Benchmark.measureWithResults("CustomHashSet remove " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         hashSet.remove(i);
+        //     }
+        //     return null;
+        // });
 
-        System.out.println("-------------------------------------------------");
+        // System.out.println("-------------------------------------------------");
         
 
-        /** CustomHashMap benchmarks */
-        CustomHashMap<Integer, Integer> hashMap = new CustomHashMap<>();
+        // /** CustomHashMap benchmarks */
+        // CustomHashMap<Integer, Integer> hashMap = new CustomHashMap<>();
 
-        Benchmark.measureWithResults("CustomHashMap put " + n + " elements", () -> {
+        // Benchmark.measureWithResults("CustomHashMap put " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         hashMap.put(i, i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomHashMap get " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         hashMap.get(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomHashMap iteration", () -> {
+        //     for (int i = 0; i < hashMap.size(); i++) {
+        //         hashMap.containsKey(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomHashMap remove " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         hashMap.remove(i);
+        //     }
+        //     return null;
+        // });
+
+        // System.out.println("-------------------------------------------------");
+
+        // /** CustomLinkedList benchmarks */
+        // CustomLinkedList<Integer> customLinkedList = new CustomLinkedList<>();
+
+        // Benchmark.measureWithResults("CustomLinkedList add " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customLinkedList.add(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomLinkedList contains " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customLinkedList.contains(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomLinkedList get " + n + " random elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         int idx = random.nextInt(customLinkedList.size());
+        //         customLinkedList.get(idx);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomLinkedList remove " + n + " elements", () -> {
+        //     while (!customLinkedList.isEmpty()) {
+        //         customLinkedList.removeAt(customLinkedList.size() - 1);
+        //     }
+        //     return null;
+        // });
+
+        // System.out.println("-------------------------------------------------");
+
+        // /** CustomStack Benchmarks */
+        // CustomStack<Integer> customStack = new CustomStack<>();
+
+        // Benchmark.measureWithResults("CustomStack push " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customStack.push(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomStack peek " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customStack.peek();
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomStack pop " + n + " elements", () -> {
+        //     while (!customStack.isEmpty()) {
+        //         customStack.pop();
+        //     }
+        //     return null;
+        // });
+
+        // System.out.println("-------------------------------------------------");
+
+        // /** CustomQueue Benchmarks */
+        // CustomQueue<Integer> customQueue = new CustomQueue<>();
+
+        // Benchmark.measureWithResults("CustomQueue enqueue " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customQueue.enqueue(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomQueue peek " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customQueue.peek();
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomQueue dequeue " + n + " elements", () -> {
+        //     while (!customQueue.isEmpty()) {
+        //         customQueue.dequeue();
+        //     }
+        //     return null;
+        // });
+
+        // System.out.println("-------------------------------------------------");
+
+        // CustomDeque<Integer> customDeque = new CustomDeque<>();
+
+        // Benchmark.measureWithResults("CustomDeque addFirst " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customDeque.addFirst(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomDeque addLast " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customDeque.addLast(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomDeque peekFirst " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customDeque.peekFirst();
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomDeque peekLast " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customDeque.peekLast();
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomDeque removeFirst " + n + " elements", () -> {
+        //     while (!customDeque.isEmpty()) {
+        //         customDeque.removeFirst();
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomDeque removeLast " + n + " elements", () -> {
+        //     while (!customDeque.isEmpty()) {
+        //         customDeque.removeLast();
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomDeque contains " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customDeque.contains(i);
+        //     }
+        //     return null;
+        // });
+
+        // System.out.println("-------------------------------------------------");
+
+        // /**  CustomLinkedPriorityQueue benchmarks */
+        // CustomLinkedPriorityQueue<Integer> customPriorityQueue = new CustomLinkedPriorityQueue<>();
+
+        // Benchmark.measureWithResults("CustomLinkedPriorityQueue enqueue " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customPriorityQueue.enqueue(i, i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomLinkedPriorityQueue peek " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         if (!customPriorityQueue.isEmpty()) {
+        //             customPriorityQueue.peek();
+        //         }
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomLinkedPriorityQueue contains " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customPriorityQueue.contains(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomLinkedPriorityQueue dequeue " + n + " elements", () -> {
+        //     while (!customPriorityQueue.isEmpty()) {
+        //         customPriorityQueue.dequeue();
+        //     }
+        //     return null;
+        // });
+
+        // System.out.println("-------------------------------------------------");
+
+        // /** CustomHeapList benchmarks */
+        // CustomHeapList<Integer> customHeapList = new CustomHeapList<>();
+
+        // Benchmark.measureWithResults("CustomHeapList add " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customHeapList.add(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomHeapList contains " + n + " elements", () -> {
+        //     for (int i = 0; i < n; i++) {
+        //         customHeapList.contains(i);
+        //     }
+        //     return null;
+        // });
+
+        // Benchmark.measureWithResults("CustomHeapList remove " + n + " elements", () -> {
+        //     while (!customHeapList.isEmpty()) {
+        //         customHeapList.remove(customHeapList.iterator().next());
+        //     }
+        //     return null;
+        // });
+
+        System.out.println("-------------------------------------------------");
+
+        /** CustomBinaryTree benchmarks */
+        CustomBinaryTree<Integer> customBinaryTree = new CustomBinaryTree<>((a, b) -> Integer.compare(a, b));    
+
+        Benchmark.measureWithResults("CustomBinaryTree insert " + n + " elements", () -> {
             for (int i = 0; i < n; i++) {
-                hashMap.put(i, i);
+                customBinaryTree.insert(i);
             }
             return null;
         });
 
-        Benchmark.measureWithResults("CustomHashMap get " + n + " elements", () -> {
+        Benchmark.measureWithResults("CustomBinaryTree contains " + n + " elements", () -> {
             for (int i = 0; i < n; i++) {
-                hashMap.get(i);
+                customBinaryTree.contains(i);
             }
             return null;
         });
 
-        Benchmark.measureWithResults("CustomHashMap iteration", () -> {
-            for (int i = 0; i < hashMap.size(); i++) {
-                hashMap.containsKey(i);
-            }
+        Benchmark.measureWithResults("CustomBinaryTree in-order traversal", () -> {
+            customBinaryTree.traverseInOrder();
             return null;
         });
 
-        Benchmark.measureWithResults("CustomHashMap remove " + n + " elements", () -> {
+        Benchmark.measureWithResults("CustomBinaryTree remove " + n + " elements", () -> {
             for (int i = 0; i < n; i++) {
-                hashMap.remove(i);
+                customBinaryTree.remove(i);
             }
             return null;
         });
 
         System.out.println("-------------------------------------------------");
-
-        /** CustomLinkedList benchmarks */
-        CustomLinkedList<Integer> customLinkedList = new CustomLinkedList<>();
-
-        Benchmark.measureWithResults("CustomLinkedList add " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customLinkedList.add(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomLinkedList contains " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customLinkedList.contains(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomLinkedList get " + n + " random elements", () -> {
-            for (int i = 0; i < n; i++) {
-                int idx = random.nextInt(customLinkedList.size());
-                customLinkedList.get(idx);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomLinkedList remove " + n + " elements", () -> {
-            while (!customLinkedList.isEmpty()) {
-                customLinkedList.removeAt(customLinkedList.size() - 1);
-            }
-            return null;
-        });
-
-        System.out.println("-------------------------------------------------");
-
-        /** CustomStack Benchmarks */
-        CustomStack<Integer> customStack = new CustomStack<>();
-
-        Benchmark.measureWithResults("CustomStack push " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customStack.push(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomStack peek " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customStack.peek();
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomStack pop " + n + " elements", () -> {
-            while (!customStack.isEmpty()) {
-                customStack.pop();
-            }
-            return null;
-        });
-
-        System.out.println("-------------------------------------------------");
-
-        /** CustomQueue Benchmarks */
-        CustomQueue<Integer> customQueue = new CustomQueue<>();
-
-        Benchmark.measureWithResults("CustomQueue enqueue " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customQueue.enqueue(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomQueue peek " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customQueue.peek();
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomQueue dequeue " + n + " elements", () -> {
-            while (!customQueue.isEmpty()) {
-                customQueue.dequeue();
-            }
-            return null;
-        });
-
-        System.out.println("-------------------------------------------------");
-
-        CustomDeque<Integer> customDeque = new CustomDeque<>();
-
-        Benchmark.measureWithResults("CustomDeque addFirst " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customDeque.addFirst(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomDeque addLast " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customDeque.addLast(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomDeque peekFirst " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customDeque.peekFirst();
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomDeque peekLast " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customDeque.peekLast();
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomDeque removeFirst " + n + " elements", () -> {
-            while (!customDeque.isEmpty()) {
-                customDeque.removeFirst();
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomDeque removeLast " + n + " elements", () -> {
-            while (!customDeque.isEmpty()) {
-                customDeque.removeLast();
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomDeque contains " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customDeque.contains(i);
-            }
-            return null;
-        });
-
-        System.out.println("-------------------------------------------------");
-
-        /**  CustomLinkedPriorityQueue benchmarks */
-        CustomLinkedPriorityQueue<Integer> customPriorityQueue = new CustomLinkedPriorityQueue<>();
-
-        Benchmark.measureWithResults("CustomLinkedPriorityQueue enqueue " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customPriorityQueue.enqueue(i, i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomLinkedPriorityQueue peek " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                if (!customPriorityQueue.isEmpty()) {
-                    customPriorityQueue.peek();
-                }
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomLinkedPriorityQueue contains " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customPriorityQueue.contains(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomLinkedPriorityQueue dequeue " + n + " elements", () -> {
-            while (!customPriorityQueue.isEmpty()) {
-                customPriorityQueue.dequeue();
-            }
-            return null;
-        });
-
-        System.out.println("-------------------------------------------------");
-
-        /** CustomHeapList benchmarks */
-        CustomHeapList<Integer> customHeapList = new CustomHeapList<>();
-
-        Benchmark.measureWithResults("CustomHeapList add " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customHeapList.add(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomHeapList contains " + n + " elements", () -> {
-            for (int i = 0; i < n; i++) {
-                customHeapList.contains(i);
-            }
-            return null;
-        });
-
-        Benchmark.measureWithResults("CustomHeapList remove " + n + " elements", () -> {
-            while (!customHeapList.isEmpty()) {
-                customHeapList.remove(customHeapList.iterator().next());
-            }
-            return null;
-        });
-
-        System.out.println("-------------------------------------------------");
-    
-
-
-
-
 
         long endTime = System.nanoTime();
         long totalTimeMs = (endTime - startTime) / 1_000_000;

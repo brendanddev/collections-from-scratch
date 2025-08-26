@@ -63,6 +63,9 @@ public class CustomBinaryTree<T> {
         } else if (cmp > 0) {
             // Value is larger, insert into right subtree
             current.right = insertRecursive(current.right, value);
+        } else {
+            // Value already exists in the tree
+            return current;
         }
 
         return current;
