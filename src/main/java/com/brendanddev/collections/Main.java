@@ -3,6 +3,7 @@ package com.brendanddev.collections;
 import java.util.Random;
 
 import com.brendanddev.collections.core.CustomIterator;
+import com.brendanddev.collections.heap.CustomHeapList;
 import com.brendanddev.collections.list.CustomArrayList;
 import com.brendanddev.collections.list.CustomLinkedList;
 import com.brendanddev.collections.map.CustomHashMap;
@@ -22,6 +23,7 @@ public class Main {
 
         int n = 100_000;
         Random random = new Random();
+        long startTime = System.nanoTime();
 
         /** CustomArrayList benchmarks */
         CustomArrayList<Integer> customArrayList = new CustomArrayList<>();
@@ -300,5 +302,40 @@ public class Main {
 
         System.out.println("-------------------------------------------------");
 
+        /** CustomHeapList benchmarks */
+        CustomHeapList<Integer> customHeapList = new CustomHeapList<>();
+
+        Benchmark.measureWithResults("CustomHeapList add " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customHeapList.add(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomHeapList contains " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customHeapList.contains(i);
+            }
+            return null;
+        });
+
+        Benchmark.measureWithResults("CustomHeapList remove " + n + " elements", () -> {
+            while (!customHeapList.isEmpty()) {
+                customHeapList.remove(customHeapList.iterator().next());
+            }
+            return null;
+        });
+
+        System.out.println("-------------------------------------------------");
+    
+
+
+
+
+
+        long endTime = System.nanoTime();
+        long totalTimeMs = (endTime - startTime) / 1_000_000;
+        System.out.println("Total benchmarking time: " + totalTimeMs + " ms");
+    
     }
 }
