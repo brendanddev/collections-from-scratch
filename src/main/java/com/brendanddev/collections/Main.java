@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.brendanddev.collections.performance.CompareLists;
 import com.brendanddev.collections.performance.CompareMaps;
-import com.brendanddev.collections.performance.CompareQueue;
+import com.brendanddev.collections.performance.CompareQueues;
 import com.brendanddev.collections.performance.CompareSets;
 import com.brendanddev.collections.performance.CompareStack;
 
@@ -30,11 +30,11 @@ public class Main {
         System.out.println("-------------------------------------------------");
         CompareStack.benchmarkStacks(n);
         System.out.println("-------------------------------------------------");
-        CompareQueue.benchmarkQueues(n);
+        CompareQueues.benchmarkQueues(n);
         System.out.println("-------------------------------------------------");
-        CompareQueue.benchmarkQueues(n);
+        CompareQueues.benchmarkQueues(n);
         System.out.println("-------------------------------------------------");
-        CompareQueue.benchmarkDeques(n);
+        CompareQueues.benchmarkDeques(n);
         System.out.println("-------------------------------------------------");
 
         // Total time metrics
@@ -48,40 +48,8 @@ public class Main {
 
 
 
-        // /**  CustomLinkedPriorityQueue benchmarks */
-        // CustomLinkedPriorityQueue<Integer> customPriorityQueue = new CustomLinkedPriorityQueue<>();
+    
 
-        // Benchmark.measureWithResults("CustomLinkedPriorityQueue enqueue " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customPriorityQueue.enqueue(i, i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomLinkedPriorityQueue peek " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         if (!customPriorityQueue.isEmpty()) {
-        //             customPriorityQueue.peek();
-        //         }
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomLinkedPriorityQueue contains " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customPriorityQueue.contains(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomLinkedPriorityQueue dequeue " + n + " elements", () -> {
-        //     while (!customPriorityQueue.isEmpty()) {
-        //         customPriorityQueue.dequeue();
-        //     }
-        //     return null;
-        // });
-
-        // System.out.println("-------------------------------------------------");
 
         // /** CustomHeapList benchmarks */
         // CustomHeapList<Integer> customHeapList = new CustomHeapList<>();

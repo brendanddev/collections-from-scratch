@@ -1,10 +1,14 @@
 package com.brendanddev.collections.performance;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 import com.brendanddev.collections.queue.CustomDeque;
+import com.brendanddev.collections.queue.CustomLinkedPriorityQueue;
 import com.brendanddev.collections.queue.CustomQueue;
 
 /**
@@ -14,7 +18,7 @@ import com.brendanddev.collections.queue.CustomQueue;
  * This class runs benchmarks for common operations such as enqueueing, dequeueing, and
  * peeking elements in both custom and Java queues and deques.
  */
-public class CompareQueue {
+public class CompareQueues {
 
     /**
      * Benchmarks the performance of CustomQueue against Java's Queue.
@@ -135,6 +139,77 @@ public class CompareQueue {
             return null;
         });
     }
+
+    /**
+     * Benchmarks the performance of CustomLinkedPriorityQueue against Java's PriorityQueue.
+     * 
+     * @param n The number of elements to enqueue, dequeue, peek, and check for containment.
+     */
+    public static void benchmarkPriorityQueues(int n) {
+        CustomLinkedPriorityQueue<Integer> customPriorityQueue = new CustomLinkedPriorityQueue<>();
+        PriorityQueue<Integer> javaPriorityQueue = new PriorityQueue<>();
+
+        List<Integer> elementsToAdd = new ArrayList<>();
+        for (int i = 0; i < n; i++) elementsToAdd.add(i);
+
+        // Compare enqueueing n elements (adding elements to the back of the queue)
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue enqueue " + n + " elements", () -> {
+            for (int e : elementsToAdd) customPriorityQueue.enqueue(e, e);
+            return null;
+        });
+        Benchmark.measureWithResults("Java PriorityQueue add " + n + " elements", () -> {
+            for (int e : elementsToAdd) javaPriorityQueue.add(e);
+            return null;
+        });
+
+        // Compare peeking n elements (accessing the front of the queue)
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue peek " + n + " elements", () -> {
+            for (int i = 0; i < elementsToAdd.size(); i++) {
+                if (!customPriorityQueue.isEmpty()) {
+                    customPriorityQueue.peek();
+                }
+            }
+            return null;
+        });
+        Benchmark.measureWithResults("Java PriorityQueue peek " + n + " elements", () -> {
+            for (int i = 0; i < elementsToAdd.size(); i++) {
+                if (!javaPriorityQueue.isEmpty()) {
+                    javaPriorityQueue.peek();
+                }
+            }
+            return null;
+        });
+
+        // Compare contains n elements
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue contains " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                customPriorityQueue.contains(i);
+            }
+            return null;
+        });
+        Benchmark.measureWithResults("Java PriorityQueue contains " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) {
+                javaPriorityQueue.contains(i);
+            }
+            return null;
+        });
+
+        // Compare dequeueing n elements (removing elements from the front of the queue)
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue dequeue " + n + " elements", () -> {
+            while (!customPriorityQueue.isEmpty()) {
+                customPriorityQueue.dequeue();
+            }
+            return null;
+        });
+        Benchmark.measureWithResults("Java PriorityQueue poll " + n + " elements", () -> {
+            while (!javaPriorityQueue.isEmpty()) {
+                javaPriorityQueue.poll();
+            }
+            return null;
+        });
+    }
+
+
     
 }
 
