@@ -101,15 +101,79 @@ public class CustomBinaryTree<T> {
         }
     }
 
+    /**
+     * Removes a value from the binary tree, if it exists.
+     * 
+     * @param value The value to remove from the tree.
+     */
+    public void remove(T value) {
+        root = removeRecursive(root, value);
+    }
 
-    
+    /**
+     * Helper to recursively remove a value from the subtree rooted at the given node.
+     * Handles all three cases: leaf node, node with one child, and node with two children.
+     * 
+     * @param current The current node in the recursion.
+     * @param value The value to remove.
+     * @return The node that should occupy this position in the tree after removal.
+     */
+    private Node<T> removeRecursive(Node<T> current, T value) {
+        // Base case - If current node is null, value is not found
+        if (current == null) {
+            return null;
+        }
 
+        // Compare the value to remove with the current nodes value
+        int cmp = comparator.compare(value, current.value);
 
+        if (cmp < 0) {
+            // Value is smaller, search in left subtree
+            current.left = removeRecursive(current.left, value);
+        } else if (cmp > 0) {
+            // Value is larger, search in right subtree
+            current.right = removeRecursive(current.right, value);
+        } else {
+            // Node with the value found
 
+            // Case 1 - Node has no children (Leaf node)
+            if (current.left == null && current.right == null) {
+                return null;
+            }
 
+            // Case 2 - Node has only one child
+            if (current.left == null) {
+                // Replace node with its right child
+                return current.right;
+            } else if (current.right == null) {
+                // Replace node with its left child
+                return current.left;
+            }
 
+            // Case 3 - Node has two children
+            // Find the minimum value in the right subtree to replace the current node's value
+            T minValue = findMin(current.right);
+            current.value = minValue;
 
+            // Remove the node that had the minimum value in the right subtree
+            current.right = removeRecursive(current.right, minValue);
+        }
+        return current;
+    }
 
+    /**
+     * Helper to find the minimum value in the subtree rooted at the given node.
+     * 
+     * @param current The root node of the subtree.
+     * @return The minimum value found in the subtree.
+     */
+    private T findMin(Node<T> current) {
+        // Keep going left until we reach the leftmost node
+        while (current.left != null) {
+            current = current.left;
+        }
+        return current.value;
+    }
 
 
     /**
