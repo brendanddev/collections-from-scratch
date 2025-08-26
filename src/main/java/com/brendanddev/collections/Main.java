@@ -20,22 +20,24 @@ public class Main {
         long startTime = System.nanoTime();
 
         System.out.println("-------------------------------------------------");
-        CompareLists.benchmarkLists(n);
-        System.out.println("-------------------------------------------------");
-        CompareLists.benchmarkLinkedLists(n);
-        System.out.println("-------------------------------------------------");
-        CompareSets.benchmarkSets(n);
-        System.out.println("-------------------------------------------------");
-        CompareMaps.benchmarkMaps(n);
-        System.out.println("-------------------------------------------------");
-        CompareStack.benchmarkStacks(n);
-        System.out.println("-------------------------------------------------");
-        CompareQueues.benchmarkQueues(n);
-        System.out.println("-------------------------------------------------");
-        CompareQueues.benchmarkQueues(n);
-        System.out.println("-------------------------------------------------");
-        CompareQueues.benchmarkDeques(n);
-        System.out.println("-------------------------------------------------");
+        // CompareLists.benchmarkLists(n);
+        // System.out.println("-------------------------------------------------");
+        // CompareLists.benchmarkLinkedLists(n);
+        // System.out.println("-------------------------------------------------");
+        // CompareSets.benchmarkSets(n);
+        // System.out.println("-------------------------------------------------");
+        // CompareMaps.benchmarkMaps(n);
+        // System.out.println("-------------------------------------------------");
+        // CompareStack.benchmarkStacks(n);
+        // System.out.println("-------------------------------------------------");
+        // CompareQueues.benchmarkQueues(n);
+        // System.out.println("-------------------------------------------------");
+        // CompareQueues.benchmarkQueues(n);
+        // System.out.println("-------------------------------------------------");
+        // CompareQueues.benchmarkDeques(n);
+        // System.out.println("-------------------------------------------------");
+        CompareQueues.benchmarkPriorityQueues(n);
+
 
         // Total time metrics
         long endTime = System.nanoTime();
