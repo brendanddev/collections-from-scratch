@@ -5,6 +5,7 @@ import java.util.Random;
 import com.brendanddev.collections.performance.CompareLists;
 import com.brendanddev.collections.performance.CompareMaps;
 import com.brendanddev.collections.performance.CompareSets;
+import com.brendanddev.collections.performance.CompareStack;
 
 /**
  * Main class to demonstrate and benchmark custom collection implementations.
@@ -17,13 +18,16 @@ public class Main {
         Random random = new Random();
         long startTime = System.nanoTime();
 
+        System.out.println("-------------------------------------------------");
         CompareLists.benchmarkLists(n);
-        System.err.println("-------------------------------------------------");
+        System.out.println("-------------------------------------------------");
         CompareLists.benchmarkLinkedLists(n);
-        System.err.println("-------------------------------------------------");
+        System.out.println("-------------------------------------------------");
         CompareSets.benchmarkSets(n);
-        System.err.println("-------------------------------------------------");
+        System.out.println("-------------------------------------------------");
         CompareMaps.benchmarkMaps(n);
+        System.out.println("-------------------------------------------------");
+        CompareStack.benchmarkStacks(n);
         System.err.println("-------------------------------------------------");
 
 
@@ -43,7 +47,6 @@ public class Main {
 
 
 
-        // System.out.println("-------------------------------------------------");
 
         // /** CustomQueue Benchmarks */
         // CustomQueue<Integer> customQueue = new CustomQueue<>();
