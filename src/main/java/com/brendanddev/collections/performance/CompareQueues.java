@@ -170,15 +170,17 @@ public class CompareQueues {
             javaPriorityQueueForPeek.add(e);
         }
 
-        // // Compare peeking n elements (accessing the front of the queue)
-        // Benchmark.measureWithResults("CustomLinkedPriorityQueue peek " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) customPriorityQueueForPeek.peek();
-        //     return null;
-        // });
-        // Benchmark.measureWithResults("Java PriorityQueue peek " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) javaPriorityQueueForPeek.peek();
-        //     return null;
-        // });
+        // Compare peeking n elements (accessing the front of the queue)
+        Benchmark.measureWithResults("CustomLinkedPriorityQueue peek " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) 
+            if (!customPriorityQueueForPeek.isEmpty()) customPriorityQueueForPeek.peek();
+            return null;
+        });
+        Benchmark.measureWithResults("Java PriorityQueue peek " + n + " elements", () -> {
+            for (int i = 0; i < n; i++) 
+            if (!customPriorityQueueForPeek.isEmpty()) javaPriorityQueueForPeek.peek();
+            return null;
+        });
 
         // Prepare fresh queues for contains test
         CustomLinkedPriorityQueue<Integer> containsCustomQueue = new CustomLinkedPriorityQueue<>();
