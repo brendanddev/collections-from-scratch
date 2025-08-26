@@ -1,9 +1,10 @@
 package com.brendanddev.collections.set;
 
-import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import com.brendanddev.collections.core.CustomCollection;
 import com.brendanddev.collections.core.CustomIterator;
+import com.brendanddev.collections.list.CustomArrayList;
 
 
 /**
@@ -18,7 +19,7 @@ import com.brendanddev.collections.core.CustomIterator;
  */
 public class CustomHashSet<T> implements CustomCollection<T> {
 
-    private ArrayList<T>[] buckets;
+    private CustomArrayList<T>[] buckets;
     private static final int DEFAULT_BUCKETS = 16;
     private int size = 0;
     public static final double AVERAGE_BUCKET_SIZE = 3;
@@ -30,9 +31,9 @@ public class CustomHashSet<T> implements CustomCollection<T> {
      */
     @SuppressWarnings("unchecked")
     public CustomHashSet() {
-        buckets = new ArrayList[DEFAULT_BUCKETS];
+        buckets = new CustomArrayList[DEFAULT_BUCKETS];
         for (int i = 0; i < DEFAULT_BUCKETS; i++) {
-            buckets[i] = new ArrayList<T>();
+            buckets[i] = new CustomArrayList<T>();
         }
     }
 
@@ -59,7 +60,7 @@ public class CustomHashSet<T> implements CustomCollection<T> {
     public boolean add(T element) {
         // Compute the bucket index for this element based on its hash code
         int index = getHash(element, buckets.length);
-        ArrayList<T> bucket = buckets[index];
+        CustomArrayList<T> bucket = buckets[index];
 
         // Prevent duplicates
         if (bucket.contains(element)) {
@@ -87,7 +88,7 @@ public class CustomHashSet<T> implements CustomCollection<T> {
     @Override
     public boolean remove(T element) {
         int index = getHash(element, buckets.length);
-        ArrayList<T> bucket = buckets[index];
+        CustomArrayList<T> bucket = buckets[index];
 
         if (bucket.remove(element)) {
             size--;
@@ -106,7 +107,7 @@ public class CustomHashSet<T> implements CustomCollection<T> {
     public boolean contains(T element) {
         // Compute which bucket this element belongs to based on its hash code
         int index = getHash(element, buckets.length);
-        ArrayList<T> bucket = buckets[index];
+        CustomArrayList<T> bucket = buckets[index];
         return bucket.contains(element);
     }
 
@@ -139,17 +140,20 @@ public class CustomHashSet<T> implements CustomCollection<T> {
         int newBucketCount = buckets.length * 2;
 
         // Create a new array of buckets, initializing each bucket as an empty list
-        ArrayList<T>[] newBuckets = new ArrayList[newBucketCount];
+        CustomArrayList<T>[] newBuckets = new CustomArrayList[newBucketCount];
         for (int i = 0; i < newBucketCount; i++) {
-            newBuckets[i] = new ArrayList<T>();
+            newBuckets[i] = new CustomArrayList<T>();
         }
 
         // Rehash each element from the old buckets into new buckets
-        for (ArrayList<T> bucket : buckets) {
-            for (T element : bucket) {
+        for (int b = 0; b < buckets.length; b++) {
+            CustomArrayList<T> bucket = buckets[b];
+            for (int i = 0; i < bucket.size(); i++) {
+                T element = bucket.get(i);
                 int index = getHash(element, newBucketCount);
                 newBuckets[index].add(element);
             }
+
         }
         // Replace old buckets with new resized bucket array
         buckets = newBuckets;
@@ -160,7 +164,7 @@ public class CustomHashSet<T> implements CustomCollection<T> {
      */
     public int getNumberOfEmptyBuckets() {
         int empty = 0;
-        for (ArrayList<T> bucket : buckets) {
+        for (CustomArrayList<T> bucket : buckets) {
             if (bucket.isEmpty()) empty++;
         }
         return empty;
@@ -171,7 +175,7 @@ public class CustomHashSet<T> implements CustomCollection<T> {
      */
     public int getLargestBucketSize() {
         int max = 0;
-        for (ArrayList<T> bucket : buckets) {
+        for (CustomArrayList<T> bucket : buckets) {
             if (bucket.size() > max) max = bucket.size();
         }
         return max;
@@ -232,7 +236,7 @@ public class CustomHashSet<T> implements CustomCollection<T> {
         @Override
         public T next() {
             if (!hasNext()) {
-                throw new IllegalStateException("No more elements in iterator!");
+                throw new NoSuchElementException("No more elements in iterator!");
             }
             return buckets[bucketIndex].get(elementIndex++);
         }
