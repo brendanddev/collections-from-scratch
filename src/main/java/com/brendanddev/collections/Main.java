@@ -48,47 +48,6 @@ public class Main {
         long totalTimeSec = totalTimeMs / 1000;
         System.out.println("Total benchmarking time: " + totalTimeMs + " ms");
         System.out.println("Total benchmarking time: " + totalTimeSec + " s");
-
-
-
-
-        // System.out.println("-------------------------------------------------");
-
-        // /** CustomBinaryTree benchmarks */
-        // CustomBinaryTree<Integer> customBinaryTree = new CustomBinaryTree<>((a, b) -> Integer.compare(a, b));    
-
-        // Collections.shuffle(values);
-        // Benchmark.measureWithResults("CustomBinaryTree insert " + n + " elements", () -> {
-        //     for (int value : values) {
-        //         customBinaryTree.insert(value);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomBinaryTree contains " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customBinaryTree.contains(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomBinaryTree in-order traversal", () -> {
-        //     customBinaryTree.traverseInOrder();
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomBinaryTree remove " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customBinaryTree.remove(i);
-        //     }
-        //     return null;
-        // });
-
-        // System.out.println("-------------------------------------------------");
-
-        // long endTime = System.nanoTime();
-        // long totalTimeMs = (endTime - startTime) / 1_000_000;
-        // System.out.println("Total benchmarking time: " + totalTimeMs + " ms");
-    
     }
+    
 }
