@@ -62,6 +62,48 @@ public class CustomBinaryTree<T> {
         return current;
     }
 
+    /**
+     * Checks if the binary tree contains the specified value.
+     * 
+     * @param value The value to search for in the tree.
+     * @return true if the value is found, otherwise false.
+     */
+    public boolean contains(T value) {
+        return containsRecursive(root, value);
+    }
+
+    /**
+     * Helper to recursively search for a value in the subtree rooted at the given node.
+     * 
+     * @param current The current node in the recursion.
+     * @param value The value to search for.
+     * @return true if the value is found in this subtree, otherwise false.
+     */
+    private boolean containsRecursive(Node<T> current, T value) {
+
+        // Base case - If current node is null, value is not found
+        if (current == null) {
+            return false;
+        }
+
+        // Compare the value to search with the current nodes value
+        int cmp = comparator.compare(value, current.value);
+
+        if (cmp == 0) {
+            // Value found
+            return true;
+        } else if (cmp < 0) {
+            // Value is smaller, search in left subtree
+            return containsRecursive(current.left, value);
+        } else {
+            // Value is larger, search in right subtree
+            return containsRecursive(current.right, value);
+        }
+    }
+
+
+    
+
 
 
 
