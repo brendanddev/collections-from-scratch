@@ -2,6 +2,8 @@ package com.brendanddev.collections.tree;
 
 
 import com.brendanddev.collections.core.CustomComparator;
+import com.brendanddev.collections.list.CustomArrayList;
+import com.brendanddev.collections.stack.CustomStack;
 
 /**
  * A custom generic implementation of a Binary Tree.
@@ -181,6 +183,36 @@ public class CustomBinaryTree<T> {
         }
         return current.value;
     }
+
+    /**
+     * Performs an in-order traversal of the binary tree.
+     * In-order traversal visits nodes in the order: Left subtree --> Root --> Right subtree.
+     * 
+     * @return A CustomArrayList containing the elements of the tree in sorted order.
+     */
+    public CustomArrayList<T> traverseInOrder() {
+        CustomArrayList<T> result = new CustomArrayList<>();
+        CustomStack<Node<T>> stack = new CustomStack<>();
+        Node<T> current = root;
+
+        // Traverse to the leftmost node
+        while (current != null || !stack.isEmpty()) {
+            // Reach the leftmost node of the current node
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+
+            // Current must be null at this point, so we pop the top node from the stack
+            current = stack.pop();
+            result.add(current.value);
+
+            // We have visited the node and its left subtree, now visit the right subtree
+            current = current.right;
+        }
+        return result;
+    }
+
 
     /** 
      * Returns the number of elements in the binary tree.
