@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.brendanddev.collections.performance.CompareLists;
 import com.brendanddev.collections.performance.CompareMaps;
+import com.brendanddev.collections.performance.CompareQueue;
 import com.brendanddev.collections.performance.CompareSets;
 import com.brendanddev.collections.performance.CompareStack;
 
@@ -28,9 +29,15 @@ public class Main {
         CompareMaps.benchmarkMaps(n);
         System.out.println("-------------------------------------------------");
         CompareStack.benchmarkStacks(n);
-        System.err.println("-------------------------------------------------");
+        System.out.println("-------------------------------------------------");
+        CompareQueue.benchmarkQueues(n);
+        System.out.println("-------------------------------------------------");
+        CompareQueue.benchmarkQueues(n);
+        System.out.println("-------------------------------------------------");
+        CompareQueue.benchmarkDeques(n);
+        System.out.println("-------------------------------------------------");
 
-
+        // Total time metrics
         long endTime = System.nanoTime();
         long totalTimeMs = (endTime - startTime) / 1_000_000;
         long totalTimeSec = totalTimeMs / 1000;
@@ -40,92 +47,6 @@ public class Main {
 
 
 
-
-
-
-
-
-
-
-
-        // /** CustomQueue Benchmarks */
-        // CustomQueue<Integer> customQueue = new CustomQueue<>();
-
-        // Benchmark.measureWithResults("CustomQueue enqueue " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customQueue.enqueue(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomQueue peek " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customQueue.peek();
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomQueue dequeue " + n + " elements", () -> {
-        //     while (!customQueue.isEmpty()) {
-        //         customQueue.dequeue();
-        //     }
-        //     return null;
-        // });
-
-        // System.out.println("-------------------------------------------------");
-
-        // CustomDeque<Integer> customDeque = new CustomDeque<>();
-
-        // Benchmark.measureWithResults("CustomDeque addFirst " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customDeque.addFirst(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomDeque addLast " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customDeque.addLast(i);
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomDeque peekFirst " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customDeque.peekFirst();
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomDeque peekLast " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customDeque.peekLast();
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomDeque removeFirst " + n + " elements", () -> {
-        //     while (!customDeque.isEmpty()) {
-        //         customDeque.removeFirst();
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomDeque removeLast " + n + " elements", () -> {
-        //     while (!customDeque.isEmpty()) {
-        //         customDeque.removeLast();
-        //     }
-        //     return null;
-        // });
-
-        // Benchmark.measureWithResults("CustomDeque contains " + n + " elements", () -> {
-        //     for (int i = 0; i < n; i++) {
-        //         customDeque.contains(i);
-        //     }
-        //     return null;
-        // });
-
-        // System.out.println("-------------------------------------------------");
 
         // /**  CustomLinkedPriorityQueue benchmarks */
         // CustomLinkedPriorityQueue<Integer> customPriorityQueue = new CustomLinkedPriorityQueue<>();
