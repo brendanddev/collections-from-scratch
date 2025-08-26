@@ -19,14 +19,57 @@ public class CustomHeapList<T extends Comparable<T>> implements CustomCollection
         list = new CustomArrayList<>();
     }
 
-
+    /**
+     * Adds an element to the heap, maintaining the heap property.
+     * 
+     * @param element The element to add to the heap.
+     * @return true, since the heap is always modified by adding.
+     */
     @Override
     public boolean add(T element) {
+        list.add(element);
+        heapifyUp(list.size() - 1);
+        return true;
     }
 
+    /**
+     * Removes the first occurrence of the specified element from the heap,
+     * if it exists. After removal, the heap property is restored.
+     * 
+     * @param element The element to remove from the heap.
+     * @return true if the element was found and removed, otherwise false.
+     */
     @Override
     public boolean remove(T element) {
-       
+        if (isEmpty()) return false;
+
+        // Find index of the element to remove
+        int indexToRemove = -1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).equals(element)) {
+                indexToRemove = i;
+                break;
+            }
+        }
+        // Element not found
+        if (indexToRemove == -1) return false;
+
+        // Get last element in the heap
+        int lastIndex = list.size() - 1;
+        T lastElement = list.get(lastIndex);
+
+        // Replace element to remove with last element 
+        // and remove last element
+        list.set(indexToRemove, lastElement);
+        list.removeAt(lastIndex);
+
+        // Restore heap property if very last element was not removed
+        if (indexToRemove < list.size()) {
+            // Need to call both directions as element might move up or down
+            heapifyDown(indexToRemove);
+            heapifyUp(indexToRemove);
+        }
+        return true;
     }
 
     /**

@@ -121,6 +121,34 @@ public class CustomArrayList<T> implements CustomCollection<T> {
         elements[index] = element;
     }
 
+    /**
+     * Removes the element at the specified index in the list.
+     * After removal, all subsequent elements to the left are shifted to fill the gap.
+     * 
+     * @param index The index of the element to remove.
+     * @return The removed element.
+     * @throws IndexOutOfBoundsException if the index is out of range.
+     */
+    @SuppressWarnings("unchecked")
+    public T removeAt(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+
+        T removedElement = (T) elements[index];
+
+        // Shift all elements left after index
+        for (int i = index; i < size - 1; i++) {
+            elements[i] = elements[i + 1];
+        }
+
+        // Clear last element reference for GC
+        elements[size - 1] = null;
+
+        size--;
+        return removedElement;
+    }
+
 
     /**
      * Returns the number of elements in the list.
