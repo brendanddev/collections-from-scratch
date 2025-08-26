@@ -176,6 +176,7 @@ public class CustomLinkedPriorityQueue<T> {
      * Represents a doubly linked node in the priority queue.
      * Each node stores a value, its priority, and pointers to the next and previous nodes.
      */
+    @SuppressWarnings("hiding")
     private class Node<T> {
         T value;
         int priority;
