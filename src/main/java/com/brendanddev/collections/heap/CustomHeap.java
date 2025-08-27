@@ -1,5 +1,7 @@
 package com.brendanddev.collections.heap;
 
+import java.util.NoSuchElementException;
+
 import com.brendanddev.collections.core.CustomCollection;
 import com.brendanddev.collections.core.CustomIterator;
 
@@ -147,7 +149,7 @@ public class CustomHeap<T extends Comparable<T>> implements CustomCollection<T> 
 
         @Override
         public T next() {
-            if (!hasNext()) throw new IndexOutOfBoundsException("No more elements in heap");
+            if (!hasNext()) throw new NoSuchElementException("No more elements in heap");
             return elements[currentIndex++];
         }
     }
