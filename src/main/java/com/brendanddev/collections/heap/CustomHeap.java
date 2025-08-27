@@ -80,6 +80,11 @@ public class CustomHeap<T extends Comparable<T>> implements CustomCollection<T> 
         return size;
     }
 
+    @Override
+    public CustomIterator<T> iterator() {
+        return new HeapIterator();
+    }
+
     private void heapifyUp(int index) {
         while (index > 0) {
             int parent = (index - 1) / 2;
@@ -131,6 +136,21 @@ public class CustomHeap<T extends Comparable<T>> implements CustomCollection<T> 
         elements[j] = temp;
     }
 
+
+    private class HeapIterator implements CustomIterator<T> {
+        private int currentIndex = 0;
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < size;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) throw new IndexOutOfBoundsException("No more elements in heap");
+            return elements[currentIndex++];
+        }
+    }
 
 
 
