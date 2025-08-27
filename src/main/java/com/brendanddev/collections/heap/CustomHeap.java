@@ -1,6 +1,7 @@
 package com.brendanddev.collections.heap;
 
 import com.brendanddev.collections.core.CustomCollection;
+import com.brendanddev.collections.core.CustomIterator;
 
 /**
  * A custom generic implementation of a Min-Heap backed by an array.
@@ -21,8 +22,28 @@ public class CustomHeap<T extends Comparable<T>> implements CustomCollection<T> 
         size = 0;
     }
 
+    @Override
+    public boolean add(T item) {
+        ensureCapacity();
+        elements[size] = item;
+        heapifyUp(size);
+        size++;
+        return true;
+    }
 
+    public T peek() {
+        return isEmpty() ? null : elements[0];
+    }
 
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
 
     private void heapifyUp(int index) {
         while (index > 0) {
