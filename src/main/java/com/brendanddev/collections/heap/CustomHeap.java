@@ -23,7 +23,7 @@ public class CustomHeap<T extends Comparable<T>> implements CustomCollection<T> 
 
 
 
-    
+
     private void heapifyUp(int index) {
         while (index > 0) {
             int parent = (index - 1) / 2;
@@ -50,6 +50,15 @@ public class CustomHeap<T extends Comparable<T>> implements CustomCollection<T> 
                 swap(index, smallest);
                 index = smallest;
             } else break;
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void ensureCapacity() {
+        if (size >= elements.length) {
+            T[] newArray = (T[]) new Comparable[elements.length * 2];
+            System.arraycopy(elements, 0, newArray, 0, elements.length);
+            elements = newArray;
         }
     }
 
