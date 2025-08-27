@@ -22,6 +22,21 @@ public class CustomHeap<T extends Comparable<T>> implements CustomCollection<T> 
         size = 0;
     }
 
+
+    public T peek() {
+        return isEmpty() ? null : elements[0];
+    }
+
+    public T poll() {
+        if (isEmpty()) return null;
+        T root = elements[0];
+        elements[0] = elements[size - 1];
+        elements[size - 1] = null;
+        size--;
+        heapifyDown(0);
+        return root;
+    }
+
     @Override
     public boolean add(T item) {
         ensureCapacity();
@@ -31,8 +46,28 @@ public class CustomHeap<T extends Comparable<T>> implements CustomCollection<T> 
         return true;
     }
 
-    public T peek() {
-        return isEmpty() ? null : elements[0];
+    public boolean remove(T item) {
+        if (isEmpty()) return false;
+
+        for (int i = 0; i < size; i++) {
+            if (elements[i].equals(item)) {
+                elements[i] = elements[size - 1];
+                elements[size - 1] = null;
+                size--;
+                heapifyDown(i);
+                heapifyUp(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean contains(T element) {
+        for (int i = 0; i < size; i++) {
+            if (elements[i].equals(element)) return true;
+        }
+        return false;
     }
 
     @Override
