@@ -63,7 +63,7 @@ public class CompareTrees {
             return null;
         });
         Benchmark.measureWithResults("Java TreeSet in-order traversal", () -> {
-            for (int e : javaTreeSetForTraversal) {
+            for (@SuppressWarnings("unused") int e : javaTreeSetForTraversal) {
                 // Simulate traversal
             }
             return null;
